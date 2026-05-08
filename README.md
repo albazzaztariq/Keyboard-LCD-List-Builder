@@ -1,6 +1,6 @@
 # Keyboard-LCD-List-Builder
 
-Authors 248×170 PNG images for the Corsair Vanguard Pro 96 keyboard's built-in LCD screen. The images are uploaded to the keyboard through the **Screen** widget in the Corsair Web Hub app — this tool does not talk to the keyboard directly.
+Authors 248×170 PNG images for built-in LCD screens on keyboards. Obviously, you can use this to generate any lists, but this was made for my Corsair Vanguard 96 Pro keyboard's screen. The images are uploaded to the keyboard through the **Screen** widget in the Corsair Web Hub app — this tool does not talk to the keyboard directly.
 
 Each image is a list of up to 8 bullet entries (≤ 26 chars each) drawn at native LCD resolution with no upscaling. Text and background colors are user-selectable, and every saved PNG carries its own metadata so that re-opening it in the GUI restores the original entries and colors.
 
