@@ -1,14 +1,14 @@
 # List Builder for Keyboard LCD Screens
 
-Authors 248×170 PNG images for built-in LCD screens on keyboards. Obviously, you can use this to generate any lists, but this was made for my Corsair Vanguard 96 Pro keyboard's screen. The images are uploaded to the keyboard through the **Screen** widget in the Corsair Web Hub app — this tool does not talk to the keyboard directly.
+Generates 248×170 PNG images for built-in LCD screens on keyboards. Obviously, you can use this to generate any lists, but this was made for my Corsair Vanguard 96 Pro keyboard's screen. The images are uploaded to the keyboard through the **Screen** widget in the Corsair Web Hub app — this tool does not talk to the keyboard directly.
 
 Each image is a list of up to 8 bullet entries (≤ 26 chars each) drawn at native LCD resolution with no upscaling. Text and background colors are user-selectable, and every saved PNG carries its own metadata so that re-opening it in the GUI restores the original entries and colors.
 
 ## Features
 
-- 8-line bullet list with auto-shrinking font (11–22 px range) so all lines fit at 248×170.
+- 8-line bullet list with auto-shrinking font (11–22 px range) so all lines fit at 248×170. 8 lines was selected because that's the most that fit neatly on my screen.
 - Live preview pane that re-renders on every keystroke and color change.
-- File table with **Name** and **Created/Modified** columns, sorted by name.
+- File table with **Name** and **Created/Modified** columns, sorted by name. This way you can see all the lists you've made or are in the folder for these images.
 - Light / dark theme toggle. The dark theme uses the Vanguard Pro 96 keyboard's purple (`#3D2185`) and dark-mode-themes the Windows title bar via the DWM API.
 - Theme and last-used colors persist across sessions in `%APPDATA%\KeyboardLCDTodoBuilder\settings.json`.
 - Self-describing PNG output: each saved file embeds its own `{items, fg, bg}` JSON in a `tEXt` chunk, so selecting a file in the GUI refills the form.
@@ -49,7 +49,7 @@ python todo_gui.py
 
 ## Running the binary
 
-Download `KeyboardLCDListBuilder.exe` from the [Releases](../../releases/latest) page and run it. No installer, no other files required. An `Images/` folder is created next to the `.exe` on first launch and holds the generated PNGs.
+Download `KeyboardLCDListBuilder.exe` from the [Releases](../../releases/latest) page and run it. Everything is self-contained obviously with a binary. An `Images/` folder is created next to the `.exe` on first launch and holds the generated PNGs.
 
 ## Generating an image
 
@@ -57,7 +57,7 @@ Download `KeyboardLCDListBuilder.exe` from the [Releases](../../releases/latest)
 2. Type up to 8 entries (≤ 26 chars each).
 3. Pick text and background colors with the **Select…** buttons.
 4. Click **Generate PNG**. The file is written to `Images/`.
-5. In the Corsair Web Hub app: Vanguard Pro 96 → **Screen** tab → **+** → pick the file.
+5. In the Corsair Web Hub app: Vanguard Pro 96 → **Screen** tab → **+** → pick the file. iCUE works basically the same.
 
 ## Internal documentation
 
@@ -65,4 +65,4 @@ Download `KeyboardLCDListBuilder.exe` from the [Releases](../../releases/latest)
 
 ## License
 
-No license declared. Use at your own discretion.
+Do what you wish. Modify it, break it, make it 1000x better - I just ask you let me know! I'd love to see any work contributed or hear about any issues encountered.
