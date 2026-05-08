@@ -146,8 +146,9 @@ LCD Image Generator for To-Do Lists & Others/
 │                               │  ─────────────────────────────────    │
 │ Preview                       │  Randomly Selected Keyboard Shortcut  │
 │ ┌─────────────────────────┐   │  Ctrl + C    Copy the selected text.  │
-│ │  (248×170 LCD preview)  │   │  Reference Sheets                     │
-│ └─────────────────────────┘   │  [Text Editing] [Desktop] [Win Key]   │
+│ │  (248×170 LCD preview)  │   │  Text Editing                         │
+│ └─────────────────────────┘   │  Reference Sheets                     │
+│                               │  [Text Editing] [Desktop] [Win Key]   │
 │                               │  [Cmd Prompt ] [Dialog ] [Explorer]   │
 │                               │  [Multi Desk ] [Taskbar] [Settings]   │
 └──────────────────────────────┴───────────────────────────────────────┘
@@ -237,8 +238,9 @@ When all entries are empty, `render_image` short-circuits and returns a solid-bg
 Two pieces of UI driven by `windows11-shortcuts.json`:
 
 **Random-shortcut ticker (rotates every `SHORTCUT_ROTATE_MS`):**
-- Lives in a fixed-height (60 px) frame with `grid_propagate(False)` so varying action-text length never resizes the parent window.
-- Displays `keys` in Consolas bold and `action` wrapped at 240 px.
+- Lives in a fixed-height (92 px) frame with `grid_propagate(False)` so varying action-text length never resizes the parent window.
+- Displays `keys` in Consolas bold (column 0) and `action` wrapped at 220 px (column 1) on the top row, plus the source category in Consolas bold on the second row.
+- `_pick_random_shortcut` builds a flat pool of `(category_display_name, shortcut)` tuples so the category travels with the chosen shortcut and lands in the third label.
 - `_schedule_shortcut_rotation` re-arms itself via `self.after`. Tk cancels pending `after` callbacks automatically on window destroy.
 
 **Reference Sheets (3 × 3 button grid):**

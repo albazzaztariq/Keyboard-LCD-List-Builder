@@ -398,7 +398,7 @@ class TodoApp(tk.Tk):
         self.shortcut_caption.grid(row=row, column=0, columnspan=3, sticky="w")
 
         row += 1
-        shortcut_frame = ttk.Frame(right, height=60)
+        shortcut_frame = ttk.Frame(right, height=92)
         shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(2, 8))
         shortcut_frame.grid_propagate(False)
         shortcut_frame.columnconfigure(1, weight=1)
@@ -406,8 +406,12 @@ class TodoApp(tk.Tk):
             shortcut_frame, text="", font=("Consolas", 10, "bold")
         )
         self.shortcut_keys_label.grid(row=0, column=0, sticky="nw", padx=(0, 14))
-        self.shortcut_action_label = ttk.Label(shortcut_frame, text="", wraplength=240)
+        self.shortcut_action_label = ttk.Label(shortcut_frame, text="", wraplength=220)
         self.shortcut_action_label.grid(row=0, column=1, sticky="nw")
+        self.shortcut_category_label = ttk.Label(
+            shortcut_frame, text="", font=("Consolas", 10, "bold")
+        )
+        self.shortcut_category_label.grid(row=1, column=0, columnspan=2, sticky="nw", pady=(6, 0))
 
         row += 1
         self.refsheets_caption = ttk.Label(right, text="Reference Sheets")
@@ -441,7 +445,8 @@ class TodoApp(tk.Tk):
         self._normal_labels = (
             self._entry_num_labels
             + [self.text_color_label, self.bg_color_label, self.filename_label,
-               self.shortcut_keys_label, self.shortcut_action_label]
+               self.shortcut_keys_label, self.shortcut_action_label,
+               self.shortcut_category_label]
         )
 
         self.style = ttk.Style(self)
@@ -651,22 +656,26 @@ class TodoApp(tk.Tk):
 
     def _pick_random_shortcut(self):
         """Choose one shortcut at random from the catalog and display it."""
-        all_shortcuts = []
+        pool = []  # list of (category_display_name, shortcut_dict)
         for cat in self._shortcuts.get("categories", {}).values():
-            all_shortcuts.extend(cat.get("shortcuts", []))
-        if not all_shortcuts:
+            cname = cat.get("display_name", "")
+            for s in cat.get("shortcuts", []):
+                pool.append((cname, s))
+        if not pool:
             self.shortcut_keys_label.configure(text="—")
             self.shortcut_action_label.configure(text="(no shortcuts loaded)")
+            self.shortcut_category_label.configure(text="")
             return
         # Avoid repeating the currently shown shortcut on consecutive rotations.
         current = self.shortcut_keys_label.cget("text") if hasattr(self, "shortcut_keys_label") else ""
-        if len(all_shortcuts) > 1:
-            choices = [s for s in all_shortcuts if s.get("keys", "") != current]
+        if len(pool) > 1:
+            choices = [p for p in pool if p[1].get("keys", "") != current]
         else:
-            choices = all_shortcuts
-        s = random.choice(choices)
+            choices = pool
+        cname, s = random.choice(choices)
         self.shortcut_keys_label.configure(text=s.get("keys", ""))
         self.shortcut_action_label.configure(text=s.get("action", ""))
+        self.shortcut_category_label.configure(text=cname)
 
     def _schedule_shortcut_rotation(self):
         """Tick the random-shortcut display every SHORTCUT_ROTATE_MS milliseconds."""
