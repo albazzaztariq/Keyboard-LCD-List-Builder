@@ -398,20 +398,20 @@ class TodoApp(tk.Tk):
         self.shortcut_caption.grid(row=row, column=0, columnspan=3, sticky="w")
 
         row += 1
-        shortcut_frame = ttk.Frame(right, height=92)
+        shortcut_frame = ttk.Frame(right, height=110)
         shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(2, 8))
         shortcut_frame.grid_propagate(False)
-        shortcut_frame.columnconfigure(1, weight=1)
+        shortcut_frame.columnconfigure(0, weight=1)
         self.shortcut_keys_label = ttk.Label(
-            shortcut_frame, text="", font=("Consolas", 10, "bold")
+            shortcut_frame, text="", font=("Consolas", 10, "bold"), wraplength=340
         )
-        self.shortcut_keys_label.grid(row=0, column=0, sticky="nw", padx=(0, 14))
-        self.shortcut_action_label = ttk.Label(shortcut_frame, text="", wraplength=220)
-        self.shortcut_action_label.grid(row=0, column=1, sticky="nw")
+        self.shortcut_keys_label.grid(row=0, column=0, sticky="nw")
+        self.shortcut_action_label = ttk.Label(shortcut_frame, text="", wraplength=340)
+        self.shortcut_action_label.grid(row=1, column=0, sticky="nw", pady=(2, 0))
         self.shortcut_category_label = ttk.Label(
             shortcut_frame, text="", font=("Consolas", 10, "bold")
         )
-        self.shortcut_category_label.grid(row=1, column=0, columnspan=2, sticky="nw", pady=(6, 0))
+        self.shortcut_category_label.grid(row=2, column=0, sticky="nw", pady=(6, 0))
 
         row += 1
         self.refsheets_caption = ttk.Label(right, text="Reference Sheets")
@@ -675,7 +675,7 @@ class TodoApp(tk.Tk):
         cname, s = random.choice(choices)
         self.shortcut_keys_label.configure(text=s.get("keys", ""))
         self.shortcut_action_label.configure(text=s.get("action", ""))
-        self.shortcut_category_label.configure(text=cname)
+        self.shortcut_category_label.configure(text=f"Category: {cname}")
 
     def _schedule_shortcut_rotation(self):
         """Tick the random-shortcut display every SHORTCUT_ROTATE_MS milliseconds."""
