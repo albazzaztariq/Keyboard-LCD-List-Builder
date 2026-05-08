@@ -9,7 +9,7 @@ Each image is a list of up to 8 bullet entries (≤ 26 chars each) drawn at nati
 - 8-line bullet list with auto-shrinking font (11–22 px range) so all lines fit at 248×170. 8 lines was selected because that's the most that fit neatly on my screen.
 - Live preview pane that re-renders on every keystroke and color change.
 - File table with **Name** and **Created/Modified** columns, sorted by name. This way you can see all the lists you've made or are in the folder for these images.
-- Light / dark theme toggle. The dark theme uses the Vanguard Pro 96 keyboard's purple (`#3D2185`) and dark-mode-themes the Windows title bar via the DWM API.
+- Light / dark theme toggle. The dark theme uses purple and dark-mode-themes the Windows title bar via the DWM API.
 - Theme and last-used colors persist across sessions in `%APPDATA%\KeyboardLCDTodoBuilder\settings.json`.
 - Self-describing PNG output: each saved file embeds its own `{items, fg, bg}` JSON in a `tEXt` chunk, so selecting a file in the GUI refills the form.
 - Bundled Windows 11 keyboard-shortcut reference panel: a random shortcut rotates every 10 seconds in the bottom-right of the window, and a 3 × 3 button grid opens scrollable reference sheets for each of the 9 categories (226 shortcuts total).
