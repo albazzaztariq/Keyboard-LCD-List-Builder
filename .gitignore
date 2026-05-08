@@ -1,0 +1,17 @@
+# PyInstaller artifacts
+_build_tmp/
+build/
+dist/
+*.spec
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# User-generated content (each user creates their own)
+Images/
+
+# OS
+Thumbs.db
+.DS_Store

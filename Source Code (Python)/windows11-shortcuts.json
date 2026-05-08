@@ -1,0 +1,2327 @@
+{
+  "metadata": {
+    "source": "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec",
+    "os": "Windows 11",
+    "scraped": "2026-05-08",
+    "total_shortcuts": 226,
+    "total_categories": 9
+  },
+  "categories": {
+    "text_editing": {
+      "display_name": "Text Editing",
+      "description": "Use the following list of shortcuts to edit text more quickly and efficiently.",
+      "shortcuts": [
+        {
+          "keys": "Backspace",
+          "action": "Delete characters to the left of the cursor."
+        },
+        {
+          "keys": "Ctrl + A",
+          "action": "Select all text."
+        },
+        {
+          "keys": "Ctrl + B",
+          "action": "Apply the bold format to the selected text."
+        },
+        {
+          "keys": "Ctrl + Backspace",
+          "action": "Delete words to the left of the cursor."
+        },
+        {
+          "keys": "Ctrl + C / Ctrl + Insert",
+          "action": "Copy the selected text."
+        },
+        {
+          "keys": "Ctrl + Del",
+          "action": "Delete words to the right of the cursor."
+        },
+        {
+          "keys": "Ctrl + Down arrow",
+          "action": "Move the cursor forward to the beginning of the next paragraph."
+        },
+        {
+          "keys": "Ctrl + End",
+          "action": "Move the cursor forward to the end of the document."
+        },
+        {
+          "keys": "Ctrl + F",
+          "action": "Find text."
+        },
+        {
+          "keys": "Ctrl + H",
+          "action": "Find and replace text."
+        },
+        {
+          "keys": "Ctrl + Home",
+          "action": "Move the cursor backward to the beginning of the document."
+        },
+        {
+          "keys": "Ctrl + I",
+          "action": "Apply the italic format to the selected text."
+        },
+        {
+          "keys": "Ctrl + Left arrow",
+          "action": "Move the cursor backward to the beginning of the previous word."
+        },
+        {
+          "keys": "Ctrl + Right arrow",
+          "action": "Move the cursor forward to the beginning of the next word."
+        },
+        {
+          "keys": "Ctrl + Shift + V",
+          "action": "Paste as plain text."
+        },
+        {
+          "keys": "Ctrl + U",
+          "action": "Apply the underline format to the selected text."
+        },
+        {
+          "keys": "Ctrl + Up arrow",
+          "action": "Move the cursor backward to the beginning of the previous paragraph."
+        },
+        {
+          "keys": "Ctrl + V / Shift + Insert",
+          "action": "Paste the last item from the clipboard."
+        },
+        {
+          "keys": "Ctrl + X",
+          "action": "Cut the selected text."
+        },
+        {
+          "keys": "Ctrl + Y",
+          "action": "Redo typing that was undone with Ctrl + Z."
+        },
+        {
+          "keys": "Ctrl + Z",
+          "action": "Undo the last typing."
+        },
+        {
+          "keys": "Del / Delete",
+          "action": "Delete characters to the right of the cursor."
+        },
+        {
+          "keys": "Down arrow",
+          "action": "Move the cursor forward to the next line."
+        },
+        {
+          "keys": "End",
+          "action": "Move the cursor forward to the end of the line."
+        },
+        {
+          "keys": "Home",
+          "action": "Move the cursor backward to the beginning of the line."
+        },
+        {
+          "keys": "Left arrow",
+          "action": "Move the cursor backward to the previous character."
+        },
+        {
+          "keys": "Page down / PgDn",
+          "action": "Move the cursor forward by one page."
+        },
+        {
+          "keys": "Page up / PgUp",
+          "action": "Move the cursor backward by one page."
+        },
+        {
+          "keys": "Right arrow",
+          "action": "Move the cursor forward to the next character."
+        },
+        {
+          "keys": "Shift + Ctrl + Down arrow",
+          "action": "Select paragraphs forward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Ctrl + End",
+          "action": "Select text between the current cursor position and the end of the document."
+        },
+        {
+          "keys": "Shift + Ctrl + Home",
+          "action": "Select text between the current cursor position and the beginning of the document."
+        },
+        {
+          "keys": "Shift + Ctrl + Left",
+          "action": "Select words backward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Ctrl + Right",
+          "action": "Select words forward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Ctrl + Up",
+          "action": "Select paragraphs backward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Down arrow",
+          "action": "Select lines forward from the current cursor position."
+        },
+        {
+          "keys": "Shift + End",
+          "action": "Select text from the current cursor position to the end of the current line."
+        },
+        {
+          "keys": "Shift + Home",
+          "action": "Select text from the current cursor position to the beginning of the current line."
+        },
+        {
+          "keys": "Shift + Left arrow",
+          "action": "Select characters backward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Page Down",
+          "action": "Select one page of text forward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Page Up",
+          "action": "Select one page of text backward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Right arrow",
+          "action": "Select characters forward from the current cursor position."
+        },
+        {
+          "keys": "Shift + Up arrow",
+          "action": "Select lines backward from the current cursor position."
+        },
+        {
+          "keys": "Tab",
+          "action": "Indent the cursor one tab stop."
+        },
+        {
+          "keys": "Up arrow",
+          "action": "Move the cursor backward to the previous line."
+        }
+      ]
+    },
+    "desktop_general": {
+      "display_name": "Desktop and General",
+      "description": "Use the following keyboard shortcuts to efficiently open, close, navigate, and do other tasks across the Windows desktop environment.",
+      "shortcuts": [
+        {
+          "keys": "Alt + A",
+          "action": "Set focus to the first icon in the Suggested actions menu."
+        },
+        {
+          "keys": "Alt + Esc",
+          "action": "Cycle through windows in the order in which they were opened."
+        },
+        {
+          "keys": "Alt + F4",
+          "action": "Close the active window. If no windows are open, prompt to shutdown."
+        },
+        {
+          "keys": "Alt + F8",
+          "action": "Show your password on the sign-in screen."
+        },
+        {
+          "keys": "Alt + Left arrow",
+          "action": "Go back."
+        },
+        {
+          "keys": "Alt + Page Down",
+          "action": "Move down one screen."
+        },
+        {
+          "keys": "Alt + Page Up",
+          "action": "Move up one screen."
+        },
+        {
+          "keys": "Alt + PrtScn",
+          "action": "Capture a screenshot of the active window and copy it to the clipboard."
+        },
+        {
+          "keys": "Alt + Right arrow",
+          "action": "Go forward."
+        },
+        {
+          "keys": "Alt + Shift + arrow keys",
+          "action": "When a group or tile is in focus on the Start menu, move it in the specified direction."
+        },
+        {
+          "keys": "Alt + Spacebar",
+          "action": "Open the context menu for the active window."
+        },
+        {
+          "keys": "Alt + Tab",
+          "action": "Switch between open windows. To cycle through multiple windows, continue to hold the Alt key and press Tab multiple times."
+        },
+        {
+          "keys": "Alt + underlined letter",
+          "action": "For actions in command or context menus, some windows and apps specify keyboard shortcuts by underlining a character in the action name. Press Alt and then the letter to do that action."
+        },
+        {
+          "keys": "Ctrl + A",
+          "action": "Select all items in a window."
+        },
+        {
+          "keys": "Ctrl + Alt + Del",
+          "action": "Switch to the security screen where you can lock the desktop, switch user, sign out, change a password, or open Task Manager."
+        },
+        {
+          "keys": "Ctrl + Alt + Tab",
+          "action": "View a thumbnail of all open apps. Use the arrow keys to switch between open apps."
+        },
+        {
+          "keys": "Ctrl + Esc",
+          "action": "Open the Start menu."
+        },
+        {
+          "keys": "Ctrl + F4",
+          "action": "In apps that are full-screen and let you have multiple documents open at the same time, close the active document but not the entire app."
+        },
+        {
+          "keys": "Ctrl + F5 / Ctrl + R",
+          "action": "Refresh the current window."
+        },
+        {
+          "keys": "Ctrl + Shift",
+          "action": "When multiple keyboard layouts are available, switch the keyboard layout."
+        },
+        {
+          "keys": "Ctrl + Shift + arrow keys",
+          "action": "When a tile is in focus on the Start menu, move it into another tile to create a folder."
+        },
+        {
+          "keys": "Ctrl + Shift + Esc",
+          "action": "Open Task Manager."
+        },
+        {
+          "keys": "Ctrl + Spacebar",
+          "action": "Enable or disable the Chinese input method editor (IME)."
+        },
+        {
+          "keys": "Ctrl + Y",
+          "action": "Redo an action that was previously undone with Ctrl + Z."
+        },
+        {
+          "keys": "Ctrl + Z",
+          "action": "Undo the previous action."
+        },
+        {
+          "keys": "Esc / Escape",
+          "action": "Stop or leave the current task, or dismiss a dialog box."
+        },
+        {
+          "keys": "F5",
+          "action": "Refresh the active window."
+        },
+        {
+          "keys": "F6",
+          "action": "Cycle through elements in a window or on the desktop."
+        },
+        {
+          "keys": "F10",
+          "action": "Activate the menu bar in the active window."
+        },
+        {
+          "keys": "PrtScn / Print Screen",
+          "action": "Select a region of the screen to capture a screenshot to the clipboard. You can then open the Snipping Tool to share or markup the image."
+        }
+      ]
+    },
+    "windows_key": {
+      "display_name": "Windows Key",
+      "description": "When you combine the Windows key with other keys, you can quickly do common tasks.",
+      "shortcuts": [
+        {
+          "keys": "Windows key",
+          "action": "Open or close the Start menu."
+        },
+        {
+          "keys": "Windows key + A",
+          "action": "Open the Windows 11 action center."
+        },
+        {
+          "keys": "Windows key + Shift + A",
+          "action": "Set focus to a Windows tip when one is available. When a Windows tip appears, bring focus to the tip. Press the keys again to bring focus to the element on the screen to which the Windows tip is anchored."
+        },
+        {
+          "keys": "Windows key + Alt + B",
+          "action": "Turn high dynamic range (HDR) on or off."
+        },
+        {
+          "keys": "Windows key + Alt + D",
+          "action": "Display and hide the date and time on the desktop."
+        },
+        {
+          "keys": "Windows key + Alt + Down arrow",
+          "action": "Snap the active window to the bottom half of the screen."
+        },
+        {
+          "keys": "Windows key + Alt + H",
+          "action": "When voice typing is open, set the focus to the keyboard."
+        },
+        {
+          "keys": "Windows key + Alt + K",
+          "action": "Mute or unmute the microphone in supported apps."
+        },
+        {
+          "keys": "Windows key + Alt + Up arrow",
+          "action": "Snap the active window to the top half of the screen."
+        },
+        {
+          "keys": "Windows key + comma (,)",
+          "action": "Temporarily peek at the desktop."
+        },
+        {
+          "keys": "Windows key + Ctrl + C",
+          "action": "If turned on in settings, enable or disable color filters."
+        },
+        {
+          "keys": "Windows key + Ctrl + Enter",
+          "action": "Open Narrator."
+        },
+        {
+          "keys": "Windows key + Ctrl + F",
+          "action": "Search for devices on a network."
+        },
+        {
+          "keys": "Windows key + Ctrl + Shift + B",
+          "action": "Wake up the device when the screen is blank or black."
+        },
+        {
+          "keys": "Windows key + Ctrl + Spacebar",
+          "action": "Change to a previously selected input option."
+        },
+        {
+          "keys": "Windows key + Ctrl + V",
+          "action": "Open the sound output page of quick settings, which includes settings for the output device, spatial sound, and the volume mixer."
+        },
+        {
+          "keys": "Windows key + D",
+          "action": "Display and hide the desktop."
+        },
+        {
+          "keys": "Windows key + Down arrow",
+          "action": "Minimize the active window."
+        },
+        {
+          "keys": "Windows key + E",
+          "action": "Open File Explorer."
+        },
+        {
+          "keys": "Windows key + Esc",
+          "action": "Close Magnifier."
+        },
+        {
+          "keys": "Windows key + F",
+          "action": "Open Feedback Hub."
+        },
+        {
+          "keys": "Windows key + forward slash (/)",
+          "action": "Start input method editor (IME) reconversion."
+        },
+        {
+          "keys": "Windows key + G",
+          "action": "Open the Game Bar."
+        },
+        {
+          "keys": "Windows key + H",
+          "action": "Open voice dictation."
+        },
+        {
+          "keys": "Windows key + Home",
+          "action": "Minimize or restore all windows except the active window."
+        },
+        {
+          "keys": "Windows key + I",
+          "action": "Open Settings."
+        },
+        {
+          "keys": "Windows key + J",
+          "action": "Open Recall. (Available on devices that meet the minimum system requirements.)"
+        },
+        {
+          "keys": "Windows key + K",
+          "action": "Open Cast from Quick Settings to connect to a display."
+        },
+        {
+          "keys": "Windows key + L",
+          "action": "Lock the computer."
+        },
+        {
+          "keys": "Windows key + Left arrow",
+          "action": "Snap the window to the left side of the screen."
+        },
+        {
+          "keys": "Windows key + M",
+          "action": "Minimize all windows."
+        },
+        {
+          "keys": "Windows key + Minus (-)",
+          "action": "Zoom out in Magnifier."
+        },
+        {
+          "keys": "Windows key + N",
+          "action": "Open notification center and calendar."
+        },
+        {
+          "keys": "Windows key + O",
+          "action": "Lock the device orientation."
+        },
+        {
+          "keys": "Windows key + P",
+          "action": "Open project settings to choose a presentation display mode."
+        },
+        {
+          "keys": "Windows key + Pause",
+          "action": "Opens the Settings app to the System > About page."
+        },
+        {
+          "keys": "Windows key + Period (.) / Windows key + Semicolon (;)",
+          "action": "Open the emoji panel."
+        },
+        {
+          "keys": "Windows key + Plus (+)",
+          "action": "Zoom in with the Magnifier."
+        },
+        {
+          "keys": "Windows key + PrtScn",
+          "action": "Capture a full screen screenshot and save it to a file in the Screenshots subfolder of the Pictures folder."
+        },
+        {
+          "keys": "Windows key + Q",
+          "action": "Open search."
+        },
+        {
+          "keys": "Windows key + R",
+          "action": "Open the Run dialog box."
+        },
+        {
+          "keys": "Windows key + Right arrow",
+          "action": "Snap the window to the right side of the screen."
+        },
+        {
+          "keys": "Windows key + S",
+          "action": "Open search."
+        },
+        {
+          "keys": "Windows key + Shift + Down arrow",
+          "action": "If a window is snapped or maximized, restore it."
+        },
+        {
+          "keys": "Windows key + Shift + Enter",
+          "action": "If the active window is a Universal Windows Platform (UWP) app, make it full screen."
+        },
+        {
+          "keys": "Windows key + Shift + Left arrow",
+          "action": "Move the active window to the monitor on the left."
+        },
+        {
+          "keys": "Windows key + Shift + M",
+          "action": "Restore minimized windows."
+        },
+        {
+          "keys": "Windows key + Shift + R",
+          "action": "Select a region of the screen to record a video. It then opens the screen recording in the Snipping Tool. By default, this screen recording is automatically saved as an MP4 file in the Screen Recordings subfolder of your Videos folder."
+        },
+        {
+          "keys": "Windows key + Shift + Right arrow",
+          "action": "Move the active window to the monitor on the right."
+        },
+        {
+          "keys": "Windows key + Shift + S",
+          "action": "Select a region of the screen to capture a screenshot to the clipboard."
+        },
+        {
+          "keys": "Windows key + Shift + Spacebar",
+          "action": "Switch backward through input languages and keyboard layouts."
+        },
+        {
+          "keys": "Windows key + Shift + Up arrow",
+          "action": "Stretch the desktop window to the top and bottom of the screen."
+        },
+        {
+          "keys": "Windows key + Shift + V",
+          "action": "Cycle through notifications."
+        },
+        {
+          "keys": "Windows key + Spacebar",
+          "action": "Switch forward through input languages and keyboard layouts."
+        },
+        {
+          "keys": "Windows key + Tab",
+          "action": "Open Task View."
+        },
+        {
+          "keys": "Windows key + U",
+          "action": "Open the Settings app to the Accessibility section."
+        },
+        {
+          "keys": "Windows key + Up arrow",
+          "action": "Maximize the active window."
+        },
+        {
+          "keys": "Windows key + V",
+          "action": "Open the clipboard history. Note: Clipboard history isn't turned on by default."
+        },
+        {
+          "keys": "Windows key + W",
+          "action": "Open Widgets."
+        },
+        {
+          "keys": "Windows key + X",
+          "action": "Open the Quick Link menu. This shortcut is the same action as right-click on the Start menu."
+        },
+        {
+          "keys": "Windows key + Y",
+          "action": "Switch input between Windows Mixed Reality and your desktop."
+        },
+        {
+          "keys": "Windows key + Z",
+          "action": "Open the snap layouts."
+        }
+      ]
+    },
+    "command_prompt": {
+      "display_name": "Command Prompt",
+      "description": "Use the following shortcuts with the Windows command prompt.",
+      "shortcuts": [
+        {
+          "keys": "Ctrl + C / Ctrl + Insert",
+          "action": "Copy the selected text."
+        },
+        {
+          "keys": "Ctrl + V / Shift + Insert",
+          "action": "Paste the selected text."
+        },
+        {
+          "keys": "Ctrl + M",
+          "action": "Enter Mark mode."
+        },
+        {
+          "keys": "Alt + selection key",
+          "action": "Begin selection in block mode."
+        },
+        {
+          "keys": "Arrow keys",
+          "action": "Move the cursor in the direction specified."
+        },
+        {
+          "keys": "Page up",
+          "action": "Move the cursor by one page up."
+        },
+        {
+          "keys": "Page down",
+          "action": "Move the cursor by one page down."
+        },
+        {
+          "keys": "Ctrl + Home (Mark mode)",
+          "action": "Move the cursor to the beginning of the buffer."
+        },
+        {
+          "keys": "Ctrl + End (Mark mode)",
+          "action": "Move the cursor to the end of the buffer."
+        },
+        {
+          "keys": "Ctrl + Up arrow",
+          "action": "Move up one line in the output history."
+        },
+        {
+          "keys": "Ctrl + Down arrow",
+          "action": "Move down one line in the output history."
+        },
+        {
+          "keys": "Ctrl + Home (History navigation)",
+          "action": "If the command line is empty, move the viewport to the top of the buffer. Otherwise, delete all the characters to the left of the cursor in the command line."
+        },
+        {
+          "keys": "Ctrl + End (History navigation)",
+          "action": "If the command line is empty, move the viewport to the command line. Otherwise, delete all the characters to the right of the cursor in the command line."
+        }
+      ]
+    },
+    "dialog_box": {
+      "display_name": "Dialog Box",
+      "description": "Use the following keyboard shortcuts with dialog windows, such as system alerts or error messages.",
+      "shortcuts": [
+        {
+          "keys": "F4",
+          "action": "Display the items in the active list."
+        },
+        {
+          "keys": "Ctrl + Tab",
+          "action": "Move forward through tabs."
+        },
+        {
+          "keys": "Ctrl + Shift + Tab",
+          "action": "Move back through tabs."
+        },
+        {
+          "keys": "Ctrl + 1, 2, 3,...",
+          "action": "Move to that tab number."
+        },
+        {
+          "keys": "Tab",
+          "action": "Move forward through options."
+        },
+        {
+          "keys": "Shift + Tab",
+          "action": "Move back through options."
+        },
+        {
+          "keys": "Alt + underlined letter",
+          "action": "Perform the command (or select the option) that is used with that letter."
+        },
+        {
+          "keys": "Spacebar",
+          "action": "Select or clear the check box if the active option is a check box."
+        },
+        {
+          "keys": "Backspace",
+          "action": "Open a folder one level up if a folder is selected in the Save As or Open dialog box."
+        },
+        {
+          "keys": "Arrow keys",
+          "action": "Select a button if the active option is a group of option buttons."
+        }
+      ]
+    },
+    "file_explorer": {
+      "display_name": "File Explorer",
+      "description": "Keyboard shortcuts for use within File Explorer.",
+      "shortcuts": [
+        {
+          "keys": "Alt + D",
+          "action": "Select the address bar."
+        },
+        {
+          "keys": "Alt + Enter",
+          "action": "Display properties for the selected item."
+        },
+        {
+          "keys": "Alt + Left arrow / Backspace",
+          "action": "Navigate to the previous folder."
+        },
+        {
+          "keys": "Alt + mouse drag a file",
+          "action": "When you drop the file, create a shortcut to the original file in that location."
+        },
+        {
+          "keys": "Alt + P",
+          "action": "Show or hide the preview pane."
+        },
+        {
+          "keys": "Alt + Right arrow",
+          "action": "View the next folder."
+        },
+        {
+          "keys": "Alt + Shift + P",
+          "action": "Show or hide the details pane."
+        },
+        {
+          "keys": "Alt + Up arrow",
+          "action": "Move up a level in the folder path."
+        },
+        {
+          "keys": "Ctrl + Arrow key (to move to an item) + Spacebar",
+          "action": "Select multiple individual items."
+        },
+        {
+          "keys": "Ctrl + D / Delete",
+          "action": "Delete the selected item and move it to the Recycle Bin."
+        },
+        {
+          "keys": "Ctrl + E / Ctrl + F",
+          "action": "Select the search box."
+        },
+        {
+          "keys": "Ctrl + L",
+          "action": "Focus on the address bar."
+        },
+        {
+          "keys": "Ctrl + mouse drag a file",
+          "action": "When you drop the file, create a copy in that location."
+        },
+        {
+          "keys": "Ctrl + mouse scroll wheel",
+          "action": "Change the size and appearance of file and folder icons."
+        },
+        {
+          "keys": "Ctrl + N",
+          "action": "Open a new window."
+        },
+        {
+          "keys": "Ctrl + Number (1-9)",
+          "action": "Move to that tab number."
+        },
+        {
+          "keys": "Ctrl + Plus (+)",
+          "action": "Resize all columns to fit text. Note: This shortcut requires using a numeric keypad."
+        },
+        {
+          "keys": "Ctrl + Shift + E",
+          "action": "Expands all folders from the tree in the navigation pane."
+        },
+        {
+          "keys": "Ctrl + Shift + N",
+          "action": "Create a new folder."
+        },
+        {
+          "keys": "Ctrl + Shift + Number (1-9)",
+          "action": "Change the view style. For example, 2 is Large icons and 6 is Details."
+        },
+        {
+          "keys": "Ctrl + Shift + Tab",
+          "action": "Move to the previous tab."
+        },
+        {
+          "keys": "Ctrl + T",
+          "action": "Open a new tab and switch to it."
+        },
+        {
+          "keys": "Ctrl + W",
+          "action": "Closes the active tab. Closes the window if there's only one tab open."
+        },
+        {
+          "keys": "Ctrl + Tab",
+          "action": "Move to the next tab."
+        },
+        {
+          "keys": "End",
+          "action": "Scroll to the bottom of the active window."
+        },
+        {
+          "keys": "F2",
+          "action": "Rename the selected item."
+        },
+        {
+          "keys": "F3",
+          "action": "Search for a file or folder."
+        },
+        {
+          "keys": "F4",
+          "action": "Select the address bar to change the current path."
+        },
+        {
+          "keys": "F5",
+          "action": "Refresh the window."
+        },
+        {
+          "keys": "F6",
+          "action": "Cycle through elements in the window."
+        },
+        {
+          "keys": "F11",
+          "action": "Maximize or minimize the active window."
+        },
+        {
+          "keys": "Home",
+          "action": "Scroll to the top of the active window."
+        },
+        {
+          "keys": "Left arrow",
+          "action": "Collapse the current selection (if it's expanded), or select the folder that the folder was in."
+        },
+        {
+          "keys": "Right arrow",
+          "action": "Display the current selection (if it's collapsed), or select the first subfolder."
+        },
+        {
+          "keys": "Shift + Arrow keys",
+          "action": "Select multiple items."
+        },
+        {
+          "keys": "Shift + Delete",
+          "action": "Permanently delete the selected item without moving it to the Recycle Bin."
+        },
+        {
+          "keys": "Shift + F10",
+          "action": "Display the context menu for the selected item."
+        },
+        {
+          "keys": "Shift + mouse drag a file",
+          "action": "When you drop the file, move it to that location."
+        },
+        {
+          "keys": "Shift + mouse right-click",
+          "action": "Display the Show more options context menu for the selected item."
+        },
+        {
+          "keys": "Windows key + E",
+          "action": "Open File Explorer."
+        }
+      ]
+    },
+    "multiple_desktops": {
+      "display_name": "Multiple Desktops",
+      "description": "Use the following keyboard shortcuts to create and work with multiple desktop environments.",
+      "shortcuts": [
+        {
+          "keys": "Windows key + Tab",
+          "action": "Open Task view."
+        },
+        {
+          "keys": "Windows key + Ctrl + D",
+          "action": "Create another desktop."
+        },
+        {
+          "keys": "Windows key + Ctrl + Right arrow",
+          "action": "Switch between other desktops you've created on the right."
+        },
+        {
+          "keys": "Windows key + Ctrl + Left arrow",
+          "action": "Switch between other desktops you've created on the left."
+        },
+        {
+          "keys": "Windows key + Ctrl + F4",
+          "action": "Close the desktop you're using."
+        }
+      ]
+    },
+    "taskbar": {
+      "display_name": "Taskbar",
+      "description": "Keyboard shortcuts for working with the Windows taskbar, pinned apps, and the notification area.",
+      "shortcuts": [
+        {
+          "keys": "Alt + Shift + Arrow",
+          "action": "When an app icon is in focus, move its position in the direction of the arrow."
+        },
+        {
+          "keys": "Ctrl + select a grouped app icon on the taskbar",
+          "action": "When multiple windows for the same app are grouped on the taskbar, press Ctrl as you select the taskbar icon to shift focus through the windows in the app group."
+        },
+        {
+          "keys": "Ctrl + Shift + select an app icon on the taskbar",
+          "action": "Open the app as an administrator."
+        },
+        {
+          "keys": "Shift + right-click an app icon on the taskbar",
+          "action": "Show the window menu for the app."
+        },
+        {
+          "keys": "Shift + right-click a grouped taskbar button",
+          "action": "Show the window menu for the group."
+        },
+        {
+          "keys": "Shift + select an app icon on the taskbar",
+          "action": "Open another instance of the app."
+        },
+        {
+          "keys": "Windows key + Alt + Enter (on taskbar item focus)",
+          "action": "Open taskbar settings."
+        },
+        {
+          "keys": "Windows key + Alt + number (0-9)",
+          "action": "Open the jump list for the app pinned to the taskbar in the position indicated by the number."
+        },
+        {
+          "keys": "Windows key + B",
+          "action": "Set the focus to the first icon in the notification area of the taskbar."
+        },
+        {
+          "keys": "Windows key + Ctrl + number (0-9)",
+          "action": "Switch to the last active window of the app pinned to the taskbar in the position indicated by the number."
+        },
+        {
+          "keys": "Windows key + Ctrl + Shift + number (0-9)",
+          "action": "Open as an administrator a new instance of the app located at the given position on the taskbar."
+        },
+        {
+          "keys": "Windows key + number (0-9)",
+          "action": "Open the app pinned to the taskbar in the position indicated by the number. If the app is already running, switch to that app."
+        },
+        {
+          "keys": "Windows key + Shift + Number (0-9)",
+          "action": "Start a new instance of the app pinned to the taskbar in the position indicated by the number."
+        },
+        {
+          "keys": "Windows key + T",
+          "action": "Cycle through apps in the taskbar. When connected to multiple monitors, continued use will cycle through apps on all available displays."
+        },
+        {
+          "keys": "Windows key + Shift + T",
+          "action": "Move to the previous app in the taskbar. When connected to multiple monitors, continued use will cycle through apps on all available displays."
+        }
+      ]
+    },
+    "settings": {
+      "display_name": "Settings",
+      "description": "Use the following keyboard shortcuts with the Settings app.",
+      "shortcuts": [
+        {
+          "keys": "Arrow keys",
+          "action": "Move focus through the currently selected region. Scroll the page."
+        },
+        {
+          "keys": "Backspace",
+          "action": "Navigate backwards."
+        },
+        {
+          "keys": "Enter / Spacebar",
+          "action": "Select the current item in focus."
+        },
+        {
+          "keys": "Shift + Tab",
+          "action": "Cycle backward through regions."
+        },
+        {
+          "keys": "Tab",
+          "action": "Cycle forward through regions."
+        },
+        {
+          "keys": "Windows key + I",
+          "action": "Open the Settings app."
+        }
+      ]
+    }
+  },
+  "all_shortcuts": [
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Backspace",
+      "action": "Delete characters to the left of the cursor."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + A",
+      "action": "Select all text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + B",
+      "action": "Apply the bold format to the selected text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Backspace",
+      "action": "Delete words to the left of the cursor."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + C / Ctrl + Insert",
+      "action": "Copy the selected text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Del",
+      "action": "Delete words to the right of the cursor."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Down arrow",
+      "action": "Move the cursor forward to the beginning of the next paragraph."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + End",
+      "action": "Move the cursor forward to the end of the document."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + F",
+      "action": "Find text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + H",
+      "action": "Find and replace text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Home",
+      "action": "Move the cursor backward to the beginning of the document."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + I",
+      "action": "Apply the italic format to the selected text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Left arrow",
+      "action": "Move the cursor backward to the beginning of the previous word."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Right arrow",
+      "action": "Move the cursor forward to the beginning of the next word."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Shift + V",
+      "action": "Paste as plain text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + U",
+      "action": "Apply the underline format to the selected text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Up arrow",
+      "action": "Move the cursor backward to the beginning of the previous paragraph."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + V / Shift + Insert",
+      "action": "Paste the last item from the clipboard."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + X",
+      "action": "Cut the selected text."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Y",
+      "action": "Redo typing that was undone with Ctrl + Z."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Ctrl + Z",
+      "action": "Undo the last typing."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Del / Delete",
+      "action": "Delete characters to the right of the cursor."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Down arrow",
+      "action": "Move the cursor forward to the next line."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "End",
+      "action": "Move the cursor forward to the end of the line."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Home",
+      "action": "Move the cursor backward to the beginning of the line."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Left arrow",
+      "action": "Move the cursor backward to the previous character."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Page down / PgDn",
+      "action": "Move the cursor forward by one page."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Page up / PgUp",
+      "action": "Move the cursor backward by one page."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Right arrow",
+      "action": "Move the cursor forward to the next character."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + Down arrow",
+      "action": "Select paragraphs forward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + End",
+      "action": "Select text between the current cursor position and the end of the document."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + Home",
+      "action": "Select text between the current cursor position and the beginning of the document."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + Left",
+      "action": "Select words backward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + Right",
+      "action": "Select words forward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Ctrl + Up",
+      "action": "Select paragraphs backward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Down arrow",
+      "action": "Select lines forward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + End",
+      "action": "Select text from the current cursor position to the end of the current line."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Home",
+      "action": "Select text from the current cursor position to the beginning of the current line."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Left arrow",
+      "action": "Select characters backward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Page Down",
+      "action": "Select one page of text forward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Page Up",
+      "action": "Select one page of text backward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Right arrow",
+      "action": "Select characters forward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Shift + Up arrow",
+      "action": "Select lines backward from the current cursor position."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Tab",
+      "action": "Indent the cursor one tab stop."
+    },
+    {
+      "category_id": "text_editing",
+      "category": "Text Editing",
+      "keys": "Up arrow",
+      "action": "Move the cursor backward to the previous line."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + A",
+      "action": "Set focus to the first icon in the Suggested actions menu."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Esc",
+      "action": "Cycle through windows in the order in which they were opened."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + F4",
+      "action": "Close the active window. If no windows are open, prompt to shutdown."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + F8",
+      "action": "Show your password on the sign-in screen."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Left arrow",
+      "action": "Go back."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Page Down",
+      "action": "Move down one screen."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Page Up",
+      "action": "Move up one screen."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + PrtScn",
+      "action": "Capture a screenshot of the active window and copy it to the clipboard."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Right arrow",
+      "action": "Go forward."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Shift + arrow keys",
+      "action": "When a group or tile is in focus on the Start menu, move it in the specified direction."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Spacebar",
+      "action": "Open the context menu for the active window."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + Tab",
+      "action": "Switch between open windows. To cycle through multiple windows, continue to hold the Alt key and press Tab multiple times."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Alt + underlined letter",
+      "action": "For actions in command or context menus, some windows and apps specify keyboard shortcuts by underlining a character in the action name. Press Alt and then the letter to do that action."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + A",
+      "action": "Select all items in a window."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Alt + Del",
+      "action": "Switch to the security screen where you can lock the desktop, switch user, sign out, change a password, or open Task Manager."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Alt + Tab",
+      "action": "View a thumbnail of all open apps. Use the arrow keys to switch between open apps."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Esc",
+      "action": "Open the Start menu."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + F4",
+      "action": "In apps that are full-screen and let you have multiple documents open at the same time, close the active document but not the entire app."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + F5 / Ctrl + R",
+      "action": "Refresh the current window."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Shift",
+      "action": "When multiple keyboard layouts are available, switch the keyboard layout."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Shift + arrow keys",
+      "action": "When a tile is in focus on the Start menu, move it into another tile to create a folder."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Shift + Esc",
+      "action": "Open Task Manager."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Spacebar",
+      "action": "Enable or disable the Chinese input method editor (IME)."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Y",
+      "action": "Redo an action that was previously undone with Ctrl + Z."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Ctrl + Z",
+      "action": "Undo the previous action."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "Esc / Escape",
+      "action": "Stop or leave the current task, or dismiss a dialog box."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "F5",
+      "action": "Refresh the active window."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "F6",
+      "action": "Cycle through elements in a window or on the desktop."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "F10",
+      "action": "Activate the menu bar in the active window."
+    },
+    {
+      "category_id": "desktop_general",
+      "category": "Desktop and General",
+      "keys": "PrtScn / Print Screen",
+      "action": "Select a region of the screen to capture a screenshot to the clipboard. You can then open the Snipping Tool to share or markup the image."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key",
+      "action": "Open or close the Start menu."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + A",
+      "action": "Open the Windows 11 action center."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + A",
+      "action": "Set focus to a Windows tip when one is available. When a Windows tip appears, bring focus to the tip. Press the keys again to bring focus to the element on the screen to which the Windows tip is anchored."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + B",
+      "action": "Turn high dynamic range (HDR) on or off."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + D",
+      "action": "Display and hide the date and time on the desktop."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + Down arrow",
+      "action": "Snap the active window to the bottom half of the screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + H",
+      "action": "When voice typing is open, set the focus to the keyboard."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + K",
+      "action": "Mute or unmute the microphone in supported apps."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Alt + Up arrow",
+      "action": "Snap the active window to the top half of the screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + comma (,)",
+      "action": "Temporarily peek at the desktop."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + C",
+      "action": "If turned on in settings, enable or disable color filters."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + Enter",
+      "action": "Open Narrator."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + F",
+      "action": "Search for devices on a network."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + Shift + B",
+      "action": "Wake up the device when the screen is blank or black."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + Spacebar",
+      "action": "Change to a previously selected input option."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Ctrl + V",
+      "action": "Open the sound output page of quick settings, which includes settings for the output device, spatial sound, and the volume mixer."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + D",
+      "action": "Display and hide the desktop."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Down arrow",
+      "action": "Minimize the active window."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + E",
+      "action": "Open File Explorer."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Esc",
+      "action": "Close Magnifier."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + F",
+      "action": "Open Feedback Hub."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + forward slash (/)",
+      "action": "Start input method editor (IME) reconversion."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + G",
+      "action": "Open the Game Bar."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + H",
+      "action": "Open voice dictation."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Home",
+      "action": "Minimize or restore all windows except the active window."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + I",
+      "action": "Open Settings."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + J",
+      "action": "Open Recall. (Available on devices that meet the minimum system requirements.)"
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + K",
+      "action": "Open Cast from Quick Settings to connect to a display."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + L",
+      "action": "Lock the computer."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Left arrow",
+      "action": "Snap the window to the left side of the screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + M",
+      "action": "Minimize all windows."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Minus (-)",
+      "action": "Zoom out in Magnifier."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + N",
+      "action": "Open notification center and calendar."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + O",
+      "action": "Lock the device orientation."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + P",
+      "action": "Open project settings to choose a presentation display mode."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Pause",
+      "action": "Opens the Settings app to the System > About page."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Period (.) / Windows key + Semicolon (;)",
+      "action": "Open the emoji panel."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Plus (+)",
+      "action": "Zoom in with the Magnifier."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + PrtScn",
+      "action": "Capture a full screen screenshot and save it to a file in the Screenshots subfolder of the Pictures folder."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Q",
+      "action": "Open search."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + R",
+      "action": "Open the Run dialog box."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Right arrow",
+      "action": "Snap the window to the right side of the screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + S",
+      "action": "Open search."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Down arrow",
+      "action": "If a window is snapped or maximized, restore it."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Enter",
+      "action": "If the active window is a Universal Windows Platform (UWP) app, make it full screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Left arrow",
+      "action": "Move the active window to the monitor on the left."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + M",
+      "action": "Restore minimized windows."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + R",
+      "action": "Select a region of the screen to record a video. It then opens the screen recording in the Snipping Tool. By default, this screen recording is automatically saved as an MP4 file in the Screen Recordings subfolder of your Videos folder."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Right arrow",
+      "action": "Move the active window to the monitor on the right."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + S",
+      "action": "Select a region of the screen to capture a screenshot to the clipboard."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Spacebar",
+      "action": "Switch backward through input languages and keyboard layouts."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + Up arrow",
+      "action": "Stretch the desktop window to the top and bottom of the screen."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Shift + V",
+      "action": "Cycle through notifications."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Spacebar",
+      "action": "Switch forward through input languages and keyboard layouts."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Tab",
+      "action": "Open Task View."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + U",
+      "action": "Open the Settings app to the Accessibility section."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Up arrow",
+      "action": "Maximize the active window."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + V",
+      "action": "Open the clipboard history. Note: Clipboard history isn't turned on by default."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + W",
+      "action": "Open Widgets."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + X",
+      "action": "Open the Quick Link menu. This shortcut is the same action as right-click on the Start menu."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Y",
+      "action": "Switch input between Windows Mixed Reality and your desktop."
+    },
+    {
+      "category_id": "windows_key",
+      "category": "Windows Key",
+      "keys": "Windows key + Z",
+      "action": "Open the snap layouts."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + C / Ctrl + Insert",
+      "action": "Copy the selected text."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + V / Shift + Insert",
+      "action": "Paste the selected text."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + M",
+      "action": "Enter Mark mode."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Alt + selection key",
+      "action": "Begin selection in block mode."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Arrow keys",
+      "action": "Move the cursor in the direction specified."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Page up",
+      "action": "Move the cursor by one page up."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Page down",
+      "action": "Move the cursor by one page down."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + Home (Mark mode)",
+      "action": "Move the cursor to the beginning of the buffer."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + End (Mark mode)",
+      "action": "Move the cursor to the end of the buffer."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + Up arrow",
+      "action": "Move up one line in the output history."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + Down arrow",
+      "action": "Move down one line in the output history."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + Home (History navigation)",
+      "action": "If the command line is empty, move the viewport to the top of the buffer. Otherwise, delete all the characters to the left of the cursor in the command line."
+    },
+    {
+      "category_id": "command_prompt",
+      "category": "Command Prompt",
+      "keys": "Ctrl + End (History navigation)",
+      "action": "If the command line is empty, move the viewport to the command line. Otherwise, delete all the characters to the right of the cursor in the command line."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "F4",
+      "action": "Display the items in the active list."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Ctrl + Tab",
+      "action": "Move forward through tabs."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Ctrl + Shift + Tab",
+      "action": "Move back through tabs."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Ctrl + 1, 2, 3,...",
+      "action": "Move to that tab number."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Tab",
+      "action": "Move forward through options."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Shift + Tab",
+      "action": "Move back through options."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Alt + underlined letter",
+      "action": "Perform the command (or select the option) that is used with that letter."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Spacebar",
+      "action": "Select or clear the check box if the active option is a check box."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Backspace",
+      "action": "Open a folder one level up if a folder is selected in the Save As or Open dialog box."
+    },
+    {
+      "category_id": "dialog_box",
+      "category": "Dialog Box",
+      "keys": "Arrow keys",
+      "action": "Select a button if the active option is a group of option buttons."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + D",
+      "action": "Select the address bar."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + Enter",
+      "action": "Display properties for the selected item."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + Left arrow / Backspace",
+      "action": "Navigate to the previous folder."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + mouse drag a file",
+      "action": "When you drop the file, create a shortcut to the original file in that location."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + P",
+      "action": "Show or hide the preview pane."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + Right arrow",
+      "action": "View the next folder."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + Shift + P",
+      "action": "Show or hide the details pane."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Alt + Up arrow",
+      "action": "Move up a level in the folder path."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Arrow key (to move to an item) + Spacebar",
+      "action": "Select multiple individual items."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + D / Delete",
+      "action": "Delete the selected item and move it to the Recycle Bin."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + E / Ctrl + F",
+      "action": "Select the search box."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + L",
+      "action": "Focus on the address bar."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + mouse drag a file",
+      "action": "When you drop the file, create a copy in that location."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + mouse scroll wheel",
+      "action": "Change the size and appearance of file and folder icons."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + N",
+      "action": "Open a new window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Number (1-9)",
+      "action": "Move to that tab number."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Plus (+)",
+      "action": "Resize all columns to fit text. Note: This shortcut requires using a numeric keypad."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Shift + E",
+      "action": "Expands all folders from the tree in the navigation pane."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Shift + N",
+      "action": "Create a new folder."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Shift + Number (1-9)",
+      "action": "Change the view style. For example, 2 is Large icons and 6 is Details."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Shift + Tab",
+      "action": "Move to the previous tab."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + T",
+      "action": "Open a new tab and switch to it."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + W",
+      "action": "Closes the active tab. Closes the window if there's only one tab open."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Ctrl + Tab",
+      "action": "Move to the next tab."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "End",
+      "action": "Scroll to the bottom of the active window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F2",
+      "action": "Rename the selected item."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F3",
+      "action": "Search for a file or folder."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F4",
+      "action": "Select the address bar to change the current path."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F5",
+      "action": "Refresh the window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F6",
+      "action": "Cycle through elements in the window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "F11",
+      "action": "Maximize or minimize the active window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Home",
+      "action": "Scroll to the top of the active window."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Left arrow",
+      "action": "Collapse the current selection (if it's expanded), or select the folder that the folder was in."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Right arrow",
+      "action": "Display the current selection (if it's collapsed), or select the first subfolder."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Shift + Arrow keys",
+      "action": "Select multiple items."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Shift + Delete",
+      "action": "Permanently delete the selected item without moving it to the Recycle Bin."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Shift + F10",
+      "action": "Display the context menu for the selected item."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Shift + mouse drag a file",
+      "action": "When you drop the file, move it to that location."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Shift + mouse right-click",
+      "action": "Display the Show more options context menu for the selected item."
+    },
+    {
+      "category_id": "file_explorer",
+      "category": "File Explorer",
+      "keys": "Windows key + E",
+      "action": "Open File Explorer."
+    },
+    {
+      "category_id": "multiple_desktops",
+      "category": "Multiple Desktops",
+      "keys": "Windows key + Tab",
+      "action": "Open Task view."
+    },
+    {
+      "category_id": "multiple_desktops",
+      "category": "Multiple Desktops",
+      "keys": "Windows key + Ctrl + D",
+      "action": "Create another desktop."
+    },
+    {
+      "category_id": "multiple_desktops",
+      "category": "Multiple Desktops",
+      "keys": "Windows key + Ctrl + Right arrow",
+      "action": "Switch between other desktops you've created on the right."
+    },
+    {
+      "category_id": "multiple_desktops",
+      "category": "Multiple Desktops",
+      "keys": "Windows key + Ctrl + Left arrow",
+      "action": "Switch between other desktops you've created on the left."
+    },
+    {
+      "category_id": "multiple_desktops",
+      "category": "Multiple Desktops",
+      "keys": "Windows key + Ctrl + F4",
+      "action": "Close the desktop you're using."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Alt + Shift + Arrow",
+      "action": "When an app icon is in focus, move its position in the direction of the arrow."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Ctrl + select a grouped app icon on the taskbar",
+      "action": "When multiple windows for the same app are grouped on the taskbar, press Ctrl as you select the taskbar icon to shift focus through the windows in the app group."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Ctrl + Shift + select an app icon on the taskbar",
+      "action": "Open the app as an administrator."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Shift + right-click an app icon on the taskbar",
+      "action": "Show the window menu for the app."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Shift + right-click a grouped taskbar button",
+      "action": "Show the window menu for the group."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Shift + select an app icon on the taskbar",
+      "action": "Open another instance of the app."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Alt + Enter (on taskbar item focus)",
+      "action": "Open taskbar settings."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Alt + number (0-9)",
+      "action": "Open the jump list for the app pinned to the taskbar in the position indicated by the number."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + B",
+      "action": "Set the focus to the first icon in the notification area of the taskbar."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Ctrl + number (0-9)",
+      "action": "Switch to the last active window of the app pinned to the taskbar in the position indicated by the number."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Ctrl + Shift + number (0-9)",
+      "action": "Open as an administrator a new instance of the app located at the given position on the taskbar."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + number (0-9)",
+      "action": "Open the app pinned to the taskbar in the position indicated by the number. If the app is already running, switch to that app."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Shift + Number (0-9)",
+      "action": "Start a new instance of the app pinned to the taskbar in the position indicated by the number."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + T",
+      "action": "Cycle through apps in the taskbar. When connected to multiple monitors, continued use will cycle through apps on all available displays."
+    },
+    {
+      "category_id": "taskbar",
+      "category": "Taskbar",
+      "keys": "Windows key + Shift + T",
+      "action": "Move to the previous app in the taskbar. When connected to multiple monitors, continued use will cycle through apps on all available displays."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Arrow keys",
+      "action": "Move focus through the currently selected region. Scroll the page."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Backspace",
+      "action": "Navigate backwards."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Enter / Spacebar",
+      "action": "Select the current item in focus."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Shift + Tab",
+      "action": "Cycle backward through regions."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Tab",
+      "action": "Cycle forward through regions."
+    },
+    {
+      "category_id": "settings",
+      "category": "Settings",
+      "keys": "Windows key + I",
+      "action": "Open the Settings app."
+    }
+  ]
+}
