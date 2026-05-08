@@ -1,4 +1,4 @@
-# Keyboard-LCD-List-Builder
+# List Builder for Keyboard LCD Screens
 
 Authors 248×170 PNG images for built-in LCD screens on keyboards. Obviously, you can use this to generate any lists, but this was made for my Corsair Vanguard 96 Pro keyboard's screen. The images are uploaded to the keyboard through the **Screen** widget in the Corsair Web Hub app — this tool does not talk to the keyboard directly.
 
