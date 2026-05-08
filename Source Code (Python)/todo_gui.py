@@ -395,8 +395,9 @@ class TodoApp(tk.Tk):
         )
 
         row += 1
-        shortcut_frame = ttk.Frame(right)
+        shortcut_frame = ttk.Frame(right, height=120)
         shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(8, 6))
+        shortcut_frame.grid_propagate(False)  # frame size never tracks content -> window cannot resize
         shortcut_frame.columnconfigure(0, weight=1)
         self.shortcut_keys_label = ttk.Label(
             shortcut_frame, text="", font=("Consolas", 10, "bold"), wraplength=320
@@ -665,11 +666,38 @@ class TodoApp(tk.Tk):
         self.shortcut_category_label.configure(text=f"Category: {cname}")
 
     def _set_action_text(self, text: str):
-        """Replace the contents of the (disabled) action Text widget."""
-        self.shortcut_action_text.configure(state="normal")
-        self.shortcut_action_text.delete("1.0", "end")
-        self.shortcut_action_text.insert("1.0", text)
-        self.shortcut_action_text.configure(state="disabled")
+        """Replace the contents of the (disabled) action Text widget.
+        If the rendered text overflows the visible area, truncate it
+        word-by-word and append '...' so it always fits without ever
+        clipping characters off-screen.
+
+        Detection: dlineinfo('end-1c') returns None when the last
+        character is on a line that's clipped by the widget's height."""
+        w = self.shortcut_action_text
+        w.configure(state="normal")
+        w.delete("1.0", "end")
+        w.insert("1.0", text)
+        w.update_idletasks()
+
+        for _ in range(200):  # safety cap
+            if w.dlineinfo("end-1c") is not None:
+                break  # last char is on a visible line -> all fits
+            current = w.get("1.0", "end-1c").rstrip()
+            if current.endswith("..."):
+                current = current[:-3].rstrip()
+            if " " in current:
+                current = current.rsplit(" ", 1)[0].rstrip()
+            else:
+                current = current[:max(0, len(current) - 1)]
+            if not current:
+                w.delete("1.0", "end")
+                w.insert("1.0", "...")
+                break
+            w.delete("1.0", "end")
+            w.insert("1.0", current + "...")
+            w.update_idletasks()
+
+        w.configure(state="disabled")
 
     def _schedule_shortcut_rotation(self):
         """Tick the random-shortcut display every SHORTCUT_ROTATE_MS milliseconds."""
