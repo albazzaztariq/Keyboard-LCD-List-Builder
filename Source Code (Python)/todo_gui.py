@@ -22,6 +22,7 @@ import re
 import sys
 import time
 import tkinter as tk
+import tkinter.font as tkfont
 from tkinter import colorchooser, messagebox, ttk
 from pathlib import Path
 
@@ -394,44 +395,31 @@ class TodoApp(tk.Tk):
         )
 
         row += 1
-        self.shortcut_caption = ttk.Label(right, text="Randomly Selected Keyboard Shortcut")
-        self.shortcut_caption.grid(row=row, column=0, columnspan=3, sticky="w")
-
-        row += 1
-        shortcut_frame = ttk.Frame(right, height=110)
-        shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(2, 8))
-        shortcut_frame.grid_propagate(False)
+        shortcut_frame = ttk.Frame(right)
+        shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(8, 6))
         shortcut_frame.columnconfigure(0, weight=1)
         self.shortcut_keys_label = ttk.Label(
-            shortcut_frame, text="", font=("Consolas", 10, "bold"), wraplength=340
+            shortcut_frame, text="", font=("Consolas", 10, "bold"), wraplength=320
         )
         self.shortcut_keys_label.grid(row=0, column=0, sticky="nw")
-        self.shortcut_action_label = ttk.Label(shortcut_frame, text="", wraplength=340)
-        self.shortcut_action_label.grid(row=1, column=0, sticky="nw", pady=(2, 0))
+        self.shortcut_action_text = tk.Text(
+            shortcut_frame, height=3, width=38, wrap="word",
+            relief="flat", bd=0, highlightthickness=0,
+            padx=0, pady=0, cursor="arrow", takefocus=0,
+        )
+        self.shortcut_action_text.grid(row=1, column=0, sticky="nw", pady=(2, 0))
+        self.shortcut_action_text.configure(state="disabled")
         self.shortcut_category_label = ttk.Label(
             shortcut_frame, text="", font=("Consolas", 10, "bold")
         )
-        self.shortcut_category_label.grid(row=2, column=0, sticky="nw", pady=(6, 0))
+        self.shortcut_category_label.grid(row=2, column=0, sticky="nw", pady=(4, 0))
 
         row += 1
-        self.refsheets_caption = ttk.Label(right, text="Reference Sheets")
-        self.refsheets_caption.grid(row=row, column=0, columnspan=3, sticky="w", pady=(4, 4))
-
-        row += 1
-        buttons_frame = ttk.Frame(right)
-        buttons_frame.grid(row=row, column=0, columnspan=3, sticky="we")
-        cats = list(self._shortcuts.get("categories", {}).items())
-        cols = 3
-        for i, (cat_key, cat) in enumerate(cats):
-            r, c = divmod(i, cols)
-            btn = ttk.Button(
-                buttons_frame,
-                text=cat["display_name"],
-                command=lambda k=cat_key: self._open_category(k),
-            )
-            btn.grid(row=r, column=c, sticky="we", padx=2, pady=2)
-        for c in range(cols):
-            buttons_frame.columnconfigure(c, weight=1)
+        self.shortcuts_ref_btn = ttk.Button(
+            right, text="Keyboard Shortcuts Reference",
+            command=self._open_shortcuts_reference,
+        )
+        self.shortcuts_ref_btn.grid(row=row, column=0, columnspan=3, sticky="we", pady=(4, 0))
 
         self._shortcut_after_id = None
         self._schedule_shortcut_rotation()
@@ -440,14 +428,13 @@ class TodoApp(tk.Tk):
         self._muted_labels = [self.status, self.entries_caption, self.png_suffix_label]
         self._caption_labels = [
             self.existing_files_label, self.preview_label_caption,
-            self.shortcut_caption, self.refsheets_caption,
         ]
         self._normal_labels = (
             self._entry_num_labels
             + [self.text_color_label, self.bg_color_label, self.filename_label,
-               self.shortcut_keys_label, self.shortcut_action_label,
-               self.shortcut_category_label]
+               self.shortcut_keys_label, self.shortcut_category_label]
         )
+        self._text_widgets = [self.shortcut_action_text]
 
         self.style = ttk.Style(self)
         try:
@@ -663,7 +650,7 @@ class TodoApp(tk.Tk):
                 pool.append((cname, s))
         if not pool:
             self.shortcut_keys_label.configure(text="—")
-            self.shortcut_action_label.configure(text="(no shortcuts loaded)")
+            self._set_action_text("(no shortcuts loaded)")
             self.shortcut_category_label.configure(text="")
             return
         # Avoid repeating the currently shown shortcut on consecutive rotations.
@@ -674,8 +661,15 @@ class TodoApp(tk.Tk):
             choices = pool
         cname, s = random.choice(choices)
         self.shortcut_keys_label.configure(text=s.get("keys", ""))
-        self.shortcut_action_label.configure(text=s.get("action", ""))
+        self._set_action_text(s.get("action", ""))
         self.shortcut_category_label.configure(text=f"Category: {cname}")
+
+    def _set_action_text(self, text: str):
+        """Replace the contents of the (disabled) action Text widget."""
+        self.shortcut_action_text.configure(state="normal")
+        self.shortcut_action_text.delete("1.0", "end")
+        self.shortcut_action_text.insert("1.0", text)
+        self.shortcut_action_text.configure(state="disabled")
 
     def _schedule_shortcut_rotation(self):
         """Tick the random-shortcut display every SHORTCUT_ROTATE_MS milliseconds."""
@@ -684,46 +678,166 @@ class TodoApp(tk.Tk):
             SHORTCUT_ROTATE_MS, self._schedule_shortcut_rotation
         )
 
-    def _open_category(self, cat_key):
-        """Open a popup window listing all shortcuts in a category."""
-        cat = self._shortcuts.get("categories", {}).get(cat_key)
-        if not cat:
+    def _open_shortcuts_reference(self):
+        """Open the combined keyboard-shortcuts dialog. Table on the left
+        (keys column + word-wrapped action column, vertical scrollbar),
+        category sidebar on the right. Action text physically cannot
+        overflow because every label has its wraplength tied to the
+        live canvas width."""
+        cats = list(self._shortcuts.get("categories", {}).items())
+        if not cats:
             return
+
+        # Measure how wide the keys column needs to be to hold the longest
+        # keystroke string in the entire catalog without wrapping (or with
+        # at most a 2-line wrap if it really is unusually long).
+        f = tkfont.nametofont("TkDefaultFont")
+        all_shortcuts = [s for _, c in cats for s in c.get("shortcuts", [])]
+        keys_col_w = min(
+            340,  # cap so the keys column never dominates
+            max((f.measure(s.get("keys", "")) for s in all_shortcuts), default=200) + 24,
+        )
+
         t = THEMES[self._current_theme]
         win = tk.Toplevel(self)
-        win.title(cat.get("display_name", cat_key))
+        win.title("Keyboard Shortcuts Reference")
         win.configure(bg=t["bg"], padx=12, pady=12)
         win.transient(self)
-        win.minsize(560, 360)
+        win.minsize(820, 520)
+        win.geometry("980x600")
 
-        if cat.get("description"):
-            desc = ttk.Label(win, text=cat["description"], wraplength=540)
-            desc.pack(anchor="w", pady=(0, 8))
+        win.columnconfigure(0, weight=1)
+        win.rowconfigure(0, weight=1)
 
-        tree_frame = ttk.Frame(win)
-        tree_frame.pack(fill="both", expand=True)
+        # Left side: title, description, header strip, scrollable table body.
+        main = ttk.Frame(win)
+        main.grid(row=0, column=0, sticky="nsew", padx=(0, 12))
+        main.columnconfigure(0, weight=1)
+        main.rowconfigure(3, weight=1)
 
-        tree = ttk.Treeview(
-            tree_frame, columns=("keys", "action"),
-            show="headings", height=18, selectmode="browse",
-        )
-        tree.heading("keys", text="Keys", anchor="center")
-        tree.heading("action", text="Action", anchor="center")
-        tree.column("keys", width=200, anchor="w", stretch=False)
-        tree.column("action", width=400, anchor="w", stretch=True)
-        tree.pack(side="left", fill="both", expand=True)
+        title_label = ttk.Label(main, text="", font=("Segoe UI", 12, "bold"))
+        title_label.grid(row=0, column=0, sticky="w")
+        desc_label = ttk.Label(main, text="", wraplength=600)
+        desc_label.grid(row=1, column=0, sticky="we", pady=(2, 8))
 
-        sb = ttk.Scrollbar(tree_frame, orient="vertical", command=tree.yview)
-        sb.pack(side="right", fill="y")
-        tree.configure(yscrollcommand=sb.set)
+        header = ttk.Frame(main)
+        header.grid(row=2, column=0, sticky="we")
+        header.columnconfigure(0, minsize=keys_col_w)
+        header.columnconfigure(1, weight=1)
+        keys_hdr = ttk.Label(header, text="Keys", anchor="center",
+                             borderwidth=1, relief="solid", padding=(4, 3))
+        keys_hdr.grid(row=0, column=0, sticky="we")
+        action_hdr = ttk.Label(header, text="Action", anchor="center",
+                               borderwidth=1, relief="solid", padding=(4, 3))
+        action_hdr.grid(row=0, column=1, sticky="we")
 
-        for s in cat.get("shortcuts", []):
-            tree.insert("", "end", values=(s.get("keys", ""), s.get("action", "")))
+        body_outer = ttk.Frame(main)
+        body_outer.grid(row=3, column=0, sticky="nsew")
+        body_outer.columnconfigure(0, weight=1)
+        body_outer.rowconfigure(0, weight=1)
+
+        canvas = tk.Canvas(body_outer, highlightthickness=0, borderwidth=0,
+                           bg=t["listbox_bg"])
+        canvas.grid(row=0, column=0, sticky="nsew")
+        scroll = ttk.Scrollbar(body_outer, orient="vertical", command=canvas.yview)
+        scroll.grid(row=0, column=1, sticky="ns")
+        canvas.configure(yscrollcommand=scroll.set)
+
+        body = tk.Frame(canvas, bg=t["listbox_bg"])
+        body_window_id = canvas.create_window((0, 0), window=body, anchor="nw")
+        body.columnconfigure(0, minsize=keys_col_w)
+        body.columnconfigure(1, weight=1)
+
+        # All tk.* widgets in the table — repainted on theme change.
+        table_tk_widgets = [canvas, body, header, keys_hdr, action_hdr]
+
+        def apply_table_palette():
+            tt = THEMES[self._current_theme]
+            canvas.configure(bg=tt["listbox_bg"])
+            body.configure(bg=tt["listbox_bg"])
+            for child in body.winfo_children():
+                if isinstance(child, tk.Label):
+                    child.configure(bg=tt["listbox_bg"], fg=tt["listbox_fg"])
+
+        win._apply_table_palette = apply_table_palette
+
+        def show_cat(cat_key):
+            cat = self._shortcuts.get("categories", {}).get(cat_key)
+            if not cat:
+                return
+            title_label.configure(text=cat.get("display_name", cat_key))
+            desc_label.configure(text=cat.get("description", ""))
+            for child in body.winfo_children():
+                child.destroy()
+            canvas.update_idletasks()
+            cw = canvas.winfo_width() or 700
+            wrap_action = max(200, cw - keys_col_w - 16)
+            wrap_keys = max(120, keys_col_w - 16)
+            tt = THEMES[self._current_theme]
+            for i, s in enumerate(cat.get("shortcuts", [])):
+                k = tk.Label(
+                    body, text=s.get("keys", ""), font=("Consolas", 10),
+                    anchor="nw", justify="left", wraplength=wrap_keys,
+                    bg=tt["listbox_bg"], fg=tt["listbox_fg"],
+                )
+                k.grid(row=i, column=0, sticky="nw", padx=8, pady=4)
+                a = tk.Label(
+                    body, text=s.get("action", ""),
+                    anchor="nw", justify="left", wraplength=wrap_action,
+                    bg=tt["listbox_bg"], fg=tt["listbox_fg"],
+                )
+                a.grid(row=i, column=1, sticky="nw", padx=8, pady=4)
+            body.update_idletasks()
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        def on_canvas_resize(ev):
+            canvas.itemconfigure(body_window_id, width=ev.width)
+            wrap_action = max(200, ev.width - keys_col_w - 16)
+            for child in body.winfo_children():
+                info = child.grid_info()
+                if int(info.get("column", 0)) == 1:
+                    child.configure(wraplength=wrap_action)
+            canvas.after_idle(
+                lambda: canvas.configure(scrollregion=canvas.bbox("all"))
+            )
+        canvas.bind("<Configure>", on_canvas_resize)
+
+        # Mousewheel scrolling — only while the cursor is inside the canvas.
+        def _on_wheel(ev):
+            canvas.yview_scroll(int(-1 * (ev.delta / 120)), "units")
+        canvas.bind("<Enter>", lambda e: canvas.bind_all("<MouseWheel>", _on_wheel))
+        canvas.bind("<Leave>", lambda e: canvas.unbind_all("<MouseWheel>"))
+
+        # Right side: vertical sidebar of category buttons.
+        sidebar = ttk.Frame(win)
+        sidebar.grid(row=0, column=1, sticky="ns")
+        for i, (cat_key, cat) in enumerate(cats):
+            btn = ttk.Button(
+                sidebar,
+                text=cat.get("display_name", cat_key),
+                command=lambda k=cat_key: show_cat(k),
+                width=20,
+            )
+            btn.grid(row=i, column=0, sticky="we", pady=(0, 4))
+
+        # Defer the first populate until after the dialog is mapped so the
+        # canvas has its real width; otherwise action labels would all be
+        # created at the fallback wraplength.
+        win.after_idle(lambda: show_cat(cats[0][0]))
 
         self._open_popups.append(win)
-        win.bind("<Destroy>",
-                 lambda ev, w=win: (ev.widget is w) and self._open_popups.remove(w)
-                 if w in self._open_popups else None)
+
+        def _on_destroy(ev, w=win):
+            if ev.widget is not w:
+                return
+            try:
+                canvas.unbind_all("<MouseWheel>")
+            except tk.TclError:
+                pass
+            if w in self._open_popups:
+                self._open_popups.remove(w)
+        win.bind("<Destroy>", _on_destroy)
+
         self._theme_popup(win, self._current_theme)
 
     def _apply_theme(self, name):
@@ -779,6 +893,14 @@ class TodoApp(tk.Tk):
         )
         self.preview_label.configure(bg=t["preview_bg"])
 
+        for txt in getattr(self, "_text_widgets", []):
+            txt.configure(
+                bg=t["bg"], fg=t["fg"],
+                insertbackground=t["fg"],
+                selectbackground=t["listbox_sel_bg"],
+                selectforeground=t["listbox_sel_fg"],
+            )
+
         for btn in (self.sun_btn, self.moon_btn):
             btn.configure(
                 bg=t["btn_bg"], fg=t["btn_fg"],
@@ -811,6 +933,14 @@ class TodoApp(tk.Tk):
         except tk.TclError:
             return
         self._set_dark_titlebar(win, name == "dark")
+        # If this popup registered a table-palette callback, run it so any
+        # tk.* widgets inside (Canvas, tk.Frame, tk.Label) repaint too.
+        fn = getattr(win, "_apply_table_palette", None)
+        if callable(fn):
+            try:
+                fn()
+            except tk.TclError:
+                pass
 
     def _apply_titlebar_theme(self, name):
         """Toggle Windows immersive dark mode on the main window's title bar."""
