@@ -83,8 +83,8 @@ LCD Image Generator for To-Do Lists & Others/
 
 | Section | Role |
 |---|---|
-| Module-level imports | stdlib + Pillow (`Image`, `ImageDraw`, `ImageFont`, `ImageTk`, `PngInfo`) + `ctypes` for the Windows dark-titlebar API + `random` for shortcut rotation. |
-| Module-level constants | Frozen-aware path resolution, geometry, defaults, font fallback list, `THEMES` palettes, `APPDATA_DIR` / `SETTINGS_FILE`, `SHORTCUTS_FILE`, `SHORTCUT_ROTATE_MS`. |
+| Module-level imports | stdlib + Pillow (`Image`, `ImageDraw`, `ImageFont`, `ImageTk`, `PngInfo`) + `tkinter.font` for measuring text + `ctypes` for the Windows dark-titlebar API + `random` for shortcut rotation. |
+| Module-level constants | Frozen-aware path resolution, geometry, defaults, font fallback list, `THEMES` palettes (each carries a nested `btn_palette`), `APPDATA_DIR` / `SETTINGS_FILE`, `SHORTCUTS_FILE`, `SHORTCUT_ROTATE_MS`, `BUTTON_FONT`. |
 | `load_user_settings()` / `save_user_settings()` | Read/write `%APPDATA%\KeyboardLCDTodoBuilder\settings.json`. Tolerant of missing file and malformed JSON. |
 | `load_shortcuts()` | Read `windows11-shortcuts.json` from `BUNDLE_DIR`. Returns `{"categories": {}}` on failure. |
 | `load_font(size)` | Try `arialbd.ttf`, then DejaVu, fall back to Pillow default. |
@@ -93,6 +93,7 @@ LCD Image Generator for To-Do Lists & Others/
 | `render_image(items, fg_hex, bg_hex)` | Auto-shrinks font, draws bullets, returns a `PIL.Image`. **No file I/O.** Returns a solid-bg image when `items` is empty. |
 | `render_png(items, fg_hex, bg_hex, out_path)` | Calls `render_image()`, attaches `todo_meta` `tEXt` chunk, saves PNG. |
 | `read_png_meta(path)` | Returns `{items, fg, bg}` dict or `None`. Tolerant of missing/garbled metadata. |
+| `class RoundedButton(tk.Canvas)` | Canvas-based button with rounded corners + slight border, hover and press states, and per-instance theming via `apply_palette(...)`. Auto-sizes to text + horizontal padding; supports `sticky="we"` stretching via a `<Configure>` re-render. `set_active(bool)` renders a sticky-pressed look (used by the sun/moon toggle). |
 | `class TodoApp` | The Tkinter window. Two-pane layout. |
 
 ---
@@ -111,11 +112,13 @@ LCD Image Generator for To-Do Lists & Others/
 | `TodoApp._live_preview` | Re-renders in memory from the current form state and pushes it to the preview pane. Bound to every entry's `<KeyRelease>`, both color pickers, and **New** / **Delete**. |
 | `TodoApp._update_preview(path)` | Loads an on-disk PNG into the preview pane. Used only by `_on_file_selected` and post-`_generate`. |
 | `TodoApp._generate` | Validates inputs, prompts on overwrite, calls `render_png`, refreshes the table, re-selects the new file, updates the preview. |
-| `TodoApp._pick_random_shortcut` | Choose one shortcut at random from the catalog and display it in the bottom panel. Filters out the currently shown entry to avoid back-to-back repeats. |
+| `TodoApp._pick_random_shortcut` | Choose one shortcut at random from the catalog and display it in the bottom panel. Filters out the currently shown entry to avoid back-to-back repeats. Sets `keys`, action `Text` widget, and `Shortcut Category: <name>` line. |
+| `TodoApp._set_action_text(text)` | Replaces the (disabled) action `Text` widget contents. If the rendered text would overflow the visible area (detected via `dlineinfo("end-1c") is None`), peels off words from the end and appends `...` until everything fits — so it never clips off-screen. |
+| `TodoApp._set_status(text, bold_prefix=None)` | Replaces the (disabled) status `Text` widget contents. If `bold_prefix` matches the start of `text`, that prefix is rendered with the `bold` tag; the rest is normal weight on the same wrapped row. Used for both the static `Output folder: <path>` line (with bold prefix) and dynamic status messages (no prefix). |
 | `TodoApp._schedule_shortcut_rotation` | Calls `_pick_random_shortcut` and re-arms itself via `self.after(SHORTCUT_ROTATE_MS, ...)`. Tk auto-cancels pending callbacks on window destroy. |
-| `TodoApp._open_category(cat_key)` | Opens a Toplevel popup with a Treeview listing every shortcut in a category. Registers itself in `_open_popups` and binds `<Destroy>` to deregister. |
-| `TodoApp._theme_popup(win, name)` | Per-popup theme applier — sets `bg` and toggles dark title bar. Called on open and on every main-window theme switch. |
-| `TodoApp._apply_theme(name)` | Applies a `THEMES[name]` palette across all widgets (root, ttk Style, Treeview, listbox, preview, theme-toggle buttons), themes any open popups via `_theme_popup`, persists the choice if changed. Calls `_apply_titlebar_theme`. |
+| `TodoApp._open_shortcuts_reference` | Opens a single combined Toplevel — left side shows a scrollable wrap-aware table of keys + actions for the currently selected category, right side is a vertical sidebar of `RoundedButton`s (one per category). Action labels' `wraplength` is bound to the live canvas width so text never overflows. Each row has 1-px theme-colored separator frames above and below. Registers itself in `_open_popups` and binds `<Destroy>` to deregister. |
+| `TodoApp._theme_popup(win, name)` | Per-popup theme applier — sets `bg`, toggles dark title bar, runs `_apply_table_palette` (if attached), and re-paints any sidebar `RoundedButton`s the popup registered. |
+| `TodoApp._apply_theme(name)` | Applies a `THEMES[name]` palette across all widgets (root, ttk Style, Treeview headings, listbox, preview, status text colors, all `RoundedButton`s), themes any open popups via `_theme_popup`, persists the choice if changed. Calls `_apply_titlebar_theme`. |
 | `TodoApp._apply_titlebar_theme(name)` | Toggles Windows immersive dark mode on the main window's title bar via `DwmSetWindowAttribute`. Delegates to the static `_set_dark_titlebar` helper. |
 | `TodoApp._set_dark_titlebar(window, dark)` | Static helper — toggles dark mode on any Tk window's title bar (attribute id 20, fallback 19 for older Win10 builds). |
 | `TodoApp._save_user_colors` | Writes `fg` + `bg` into `settings.json` after each color pick. |
@@ -128,29 +131,29 @@ LCD Image Generator for To-Do Lists & Others/
 ┌──────────────────────────────────────────────────────────────────────┐
 │ Title bar — toggles dark via DwmSetWindowAttribute                  │
 ├──────────────────────────────┬───────────────────────────────────────┤
-│ Existing files                │ Up to 8 entries, 26 chars each.  ☀ ☾ │
-│ ┌─────────────────────────┐   │                                       │
-│ │       Refresh           │   │  1.  [______________________]         │
-│ └─────────────────────────┘   │  2.  [______________________]         │
-│ ┌────────┬────────────────┐   │  …                                    │
-│ │  Name  │Created/Modified│   │  8.  [______________________]         │
+│ Existing files                │ Up to 8 entries, 26 characters each. ☀ ☾ │
+│ ╭─────────────────────────╮   │                                       │
+│ │       Refresh           │   │       1.  [_____________]             │
+│ ╰─────────────────────────╯   │       2.  [_____________]             │
+│ ┌────────┬────────────────┐   │       …  (centered block)             │
+│ │  Name  │Created/Modified│   │       8.  [_____________]             │
 │ │  todo1 │   5/8/2026     │   │                                       │
 │ │        │                │   │  Text color:    [██]  Select…        │
 │ └────────┴────────────────┘   │  Background:    [██]  Select…        │
-│ ┌─────────────────────────┐   │                                       │
+│ ╭─────────────────────────╮   │                                       │
 │ │       Delete            │   │  Filename: [todo1]      .png          │
-│ └─────────────────────────┘   │  ┌────────────────────────────────┐   │
-│ ┌─────────────────────────┐   │  │       Generate PNG             │   │
-│ │         New             │   │  └────────────────────────────────┘   │
-│ └─────────────────────────┘   │  Output folder: …\Images              │
+│ ╰─────────────────────────╯   │  ╭────────────────────────────────╮   │
+│ ╭─────────────────────────╮   │  │       Generate PNG             │   │
+│ │         New             │   │  ╰────────────────────────────────╯   │
+│ ╰─────────────────────────╯   │  Output folder: C:\Users\…\Images     │
 │                               │  ─────────────────────────────────    │
-│ Preview                       │  Randomly Selected Keyboard Shortcut  │
-│ ┌─────────────────────────┐   │  Ctrl + C    Copy the selected text.  │
-│ │  (248×170 LCD preview)  │   │  Text Editing                         │
-│ └─────────────────────────┘   │  Reference Sheets                     │
-│                               │  [Text Editing] [Desktop] [Win Key]   │
-│                               │  [Cmd Prompt ] [Dialog ] [Explorer]   │
-│                               │  [Multi Desk ] [Taskbar] [Settings]   │
+│ Preview                       │  ─────────────────────────────────    │
+│ ┌─────────────────────────┐   │  Ctrl + C                             │
+│ │  (248×170 LCD preview)  │   │  Copy the selected text.              │
+│ │                         │   │  Shortcut Category: Text Editing      │
+│ │                         │   │  ╭────────────────────────────────╮   │
+│ │                         │   │  │ Keyboard Shortcuts Reference   │   │
+│ └─────────────────────────┘   │  ╰────────────────────────────────╯   │
 └──────────────────────────────┴───────────────────────────────────────┘
 ```
 
@@ -202,20 +205,22 @@ All keys are optional. Missing keys fall back to: `theme = "light"`, `fg = DEFAU
 
 ## Theming
 
-Two palettes are defined in the `THEMES` dict: `"light"` and `"dark"`. Each palette covers ~17 color slots (root bg, fg, muted/caption text, listbox row + selection, table heading + divider, button, entry, preview pane, etc.).
+Two palettes are defined in the `THEMES` dict: `"light"` and `"dark"`. Each palette covers ~18 color slots (root bg, fg, muted/caption text, listbox row + selection, table heading + divider, entry, preview pane, etc.) plus a nested `btn_palette` sub-dict that drives every `RoundedButton` (`bg`, `fg`, `border`, `hover_bg`, `press_bg`, `active_bg`, `parent_bg`).
 
 `_apply_theme(name)` does the work:
 
 1. Sets root window `bg`.
-2. Configures `ttk.Style` (under `clam` base theme so the colors actually take effect) for `TFrame`, `TLabel`, `TSeparator`, `TButton`, `TEntry`, `Treeview`, and `Treeview.Heading`. Treeview headings use `relief="solid"` + `borderwidth=1` to give the File-Explorer-style divider.
+2. Configures `ttk.Style` (under `clam` base theme so the colors actually take effect) for `TFrame`, `TLabel`, `TSeparator`, `TEntry`, `Treeview`, and `Treeview.Heading`. Treeview headings use `relief="solid"` + `borderwidth=1` to give the File-Explorer-style divider.
 3. Walks tracked label groups (`_muted_labels`, `_caption_labels`, `_normal_labels`) and applies foreground colors per group.
-4. Sets the preview holder `Frame`'s `highlightbackground` for the border, and the preview Label's `bg`.
-5. Repaints the sun/moon toggle buttons to indicate which is active (`relief="sunken"` for the active one).
-6. Calls `_apply_titlebar_theme` to switch the Windows title bar to dark or light via DWM.
-7. Iterates `_open_popups` and calls `_theme_popup` on each so any open reference-sheet windows track theme changes cleanly.
-8. If the theme actually changed, persists the choice to `settings.json`.
+4. Walks `_text_widgets` (the status `Text` and the action `Text`) and recolors `bg`/`fg`/select colors.
+5. Sets the preview holder `Frame`'s `highlightbackground` for the border, and the preview Label's `bg`.
+6. Calls `apply_palette(...)` on every `RoundedButton` in `_rounded_buttons` (and on the sidebar buttons of every open popup, via `_theme_popup`).
+7. Calls `set_active(...)` on the sun/moon toggle so the button matching the current theme renders as sticky-pressed.
+8. Calls `_apply_titlebar_theme` to switch the Windows title bar to dark or light via DWM.
+9. Iterates `_open_popups` and calls `_theme_popup` on each so any open reference-sheet windows track theme changes cleanly (re-paints sidebar buttons + scrollable table cells + row separators).
+10. If the theme actually changed, persists the choice to `settings.json`.
 
-The dark palette uses `#3D2185` as the root background (RGB 61, 33, 133 — the deep purple matching the Vanguard Pro 96 keyboard glow) with darker `#2A1660` for input fields and the table body, and `#1F104A` for the table header strip.
+The dark palette uses `#3D2185` as the root background. `btn_palette` for dark uses `#5A3DA6` button bg with `#8A6DD6` border; light uses `#FFFFFF` button bg with `#B0B0B0` border.
 
 ---
 
@@ -238,16 +243,21 @@ When all entries are empty, `render_image` short-circuits and returns a solid-bg
 Two pieces of UI driven by `windows11-shortcuts.json`:
 
 **Random-shortcut ticker (rotates every `SHORTCUT_ROTATE_MS`):**
-- Lives in a fixed-height (92 px) frame with `grid_propagate(False)` so varying action-text length never resizes the parent window.
-- Displays `keys` in Consolas bold (column 0) and `action` wrapped at 220 px (column 1) on the top row, plus the source category in Consolas bold on the second row.
+- Lives in a fixed-height (114 px) frame with `grid_propagate(False)` so varying action-text length never resizes the parent window.
+- Stacked vertically: row 0 = `keys` (Consolas bold, full panel width with wraplength so long key combos wrap inside the panel), row 1 = `action` rendered into a fixed 38×3 `tk.Text` widget, row 2 = `Shortcut Category: <name>` (Consolas bold).
+- `_set_action_text(text)` truncates the action with `...` (peeling off whole words from the end) when its rendered height would otherwise overflow the visible 3-line area, detected via `dlineinfo("end-1c") is None`. Window size is therefore stable across all 226 shortcuts.
 - `_pick_random_shortcut` builds a flat pool of `(category_display_name, shortcut)` tuples so the category travels with the chosen shortcut and lands in the third label.
 - `_schedule_shortcut_rotation` re-arms itself via `self.after`. Tk cancels pending `after` callbacks automatically on window destroy.
 
-**Reference Sheets (3 × 3 button grid):**
-- One button per category (`text_editing`, `desktop_general`, `windows_key`, `command_prompt`, `dialog_box`, `file_explorer`, `multiple_desktops`, `taskbar`, `settings`).
-- Click → `_open_category(cat_key)` opens a `Toplevel` with a scrollable Treeview (Keys + Action columns).
+**Single Keyboard Shortcuts Reference button → combined dialog:**
+- One `RoundedButton` labeled "Keyboard Shortcuts Reference" sits below the ticker; its bottom edge is sized to align exactly with the bottom of the Preview pane on the left.
+- Click → `_open_shortcuts_reference()` opens a `Toplevel`. Layout:
+  - Left side: title (Segoe UI 12 bold), description, header strip with "Keys" / "Action" labels, and a scrollable `Canvas` whose interior `Frame` holds the rows.
+  - Each row is two `tk.Label`s — keys (Consolas) and action (default font, `wraplength` bound to the live canvas width via `<Configure>` so resizing the dialog re-flows wrapping in real time, and action text physically can't extend past the column).
+  - 1 px theme-colored separator `Frame`s above each row plus one final separator after the last, so every entry is bounded by lines top and bottom.
+  - Right side: vertical sidebar of `RoundedButton`s, one per category. Click switches the table contents.
 - Each popup is registered in `self._open_popups` and bound to `<Destroy>` for clean deregistration.
-- `_apply_theme` re-themes all open popups so toggling sun/moon while a reference sheet is open updates it cleanly (background, title bar, and Treeview styling all follow).
+- `_apply_theme` re-themes all open popups so toggling sun/moon while a reference sheet is open updates it cleanly (background, title bar, sidebar buttons, table cells and row separators all follow).
 
 ---
 
@@ -311,9 +321,11 @@ user clicks ☀ or ☾
    → _apply_titlebar_theme         ← DwmSetWindowAttribute
    → save_user_settings (only if theme changed)
 
-user clicks a Reference Sheets button
-   → _open_category(cat_key)
-   → Toplevel + Treeview listing every shortcut in the category
+user clicks Keyboard Shortcuts Reference
+   → _open_shortcuts_reference()
+   → Toplevel with scrollable wrap-aware table (left) + category sidebar (right)
+   → first category's shortcuts loaded by default
+   → click a sidebar button → table re-populates for that category
    → registered in _open_popups; deregistered on Destroy
 
 every SHORTCUT_ROTATE_MS

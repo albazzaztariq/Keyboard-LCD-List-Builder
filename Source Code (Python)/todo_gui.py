@@ -128,6 +128,15 @@ THEMES = {
         "entry_fg":        "#000000",
         "preview_bg":      "#E0E0E0",
         "preview_border":  "#888888",
+        "btn_palette": {
+            "bg":         "#FFFFFF",
+            "fg":         "#202020",
+            "border":     "#B0B0B0",
+            "hover_bg":   "#F0F6FC",
+            "press_bg":   "#DCE9F7",
+            "active_bg":  "#CDE0F4",
+            "parent_bg":  "#F0F0F0",
+        },
     },
     "dark": {
         "bg":              "#3D2185",
@@ -148,6 +157,15 @@ THEMES = {
         "entry_fg":        "#FFFFFF",
         "preview_bg":      "#2A1660",
         "preview_border":  "#9F84D9",
+        "btn_palette": {
+            "bg":         "#5A3DA6",
+            "fg":         "#FFFFFF",
+            "border":     "#8A6DD6",
+            "hover_bg":   "#6F4DBE",
+            "press_bg":   "#8662D0",
+            "active_bg":  "#9F84D9",
+            "parent_bg":  "#3D2185",
+        },
     },
 }
 
@@ -243,6 +261,134 @@ def read_png_meta(path: Path):
         return None
 
 
+BUTTON_FONT = ("Segoe UI", 10)
+
+
+class RoundedButton(tk.Canvas):
+    """Canvas-based button with rounded corners + slight border, hover and
+    press states, and per-instance theming."""
+
+    def __init__(self, parent, text="", command=None, *,
+                 width=None, height=30, radius=8,
+                 font=BUTTON_FONT, padx=18, pady=0, **canvas_kwargs):
+        super().__init__(
+            parent, height=height,
+            highlightthickness=0, bd=0, **canvas_kwargs,
+        )
+        self._text = text
+        self._font = font
+        self._command = command
+        self._height = height
+        self._radius = radius
+        self._padx = padx
+        self._enabled = True
+        self._state = "normal"
+        self._sticky_pressed = False  # for sun/moon "active" indication
+
+        if width is None:
+            f = tkfont.Font(family=font[0], size=font[1])
+            width = f.measure(text) + 2 * padx
+        self._width = max(width, 2 * radius + 4)
+        self.configure(width=self._width)
+
+        # Default light-theme palette; overridden by apply_palette().
+        self._palette = {
+            "bg":         "#FFFFFF",
+            "fg":         "#202020",
+            "border":     "#C0C0C0",
+            "hover_bg":   "#F0F6FC",
+            "press_bg":   "#DCE9F7",
+            "active_bg":  "#CDE0F4",
+            "parent_bg":  "#F0F0F0",
+        }
+        self.configure(bg=self._palette["parent_bg"])
+
+        self._render()
+        self.bind("<Configure>", self._on_resize)
+        self.bind("<Button-1>", self._on_press)
+        self.bind("<ButtonRelease-1>", self._on_release)
+        self.bind("<Enter>", self._on_enter)
+        self.bind("<Leave>", self._on_leave)
+
+    def _round_rect(self, x1, y1, x2, y2, r, fill, outline):
+        # Approximate rounded rect via a smoothed polygon. Each corner
+        # uses three points so smooth=True bends them into an arc.
+        pts = [
+            x1 + r, y1,
+            x2 - r, y1, x2, y1, x2, y1 + r,
+            x2, y2 - r, x2, y2, x2 - r, y2,
+            x1 + r, y2, x1, y2, x1, y2 - r,
+            x1, y1 + r, x1, y1, x1 + r, y1,
+        ]
+        return self.create_polygon(
+            pts, smooth=True, splinesteps=24,
+            fill=fill, outline=outline, width=1,
+        )
+
+    def _render(self):
+        self.delete("all")
+        p = self._palette
+        if self._sticky_pressed:
+            fill = p["active_bg"]
+        else:
+            fill = {"normal": p["bg"], "hover": p["hover_bg"],
+                    "press": p["press_bg"]}.get(self._state, p["bg"])
+        self._round_rect(1, 1, self._width - 1, self._height - 1,
+                         self._radius, fill, p["border"])
+        self.create_text(self._width / 2, self._height / 2,
+                         text=self._text, fill=p["fg"], font=self._font)
+
+    def _on_resize(self, ev):
+        if ev.width and ev.width != self._width:
+            self._width = ev.width
+            self._render()
+
+    def _on_press(self, _ev):
+        if not self._enabled:
+            return
+        self._state = "press"
+        self._render()
+
+    def _on_release(self, ev):
+        if not self._enabled:
+            return
+        was_press = self._state == "press"
+        over = 0 <= ev.x < self._width and 0 <= ev.y < self._height
+        self._state = "hover" if over else "normal"
+        self._render()
+        if was_press and over and self._command:
+            self._command()
+
+    def _on_enter(self, _ev):
+        if not self._enabled or self._state == "press":
+            return
+        self._state = "hover"
+        self._render()
+
+    def _on_leave(self, _ev):
+        if not self._enabled:
+            return
+        self._state = "normal"
+        self._render()
+
+    def apply_palette(self, palette: dict):
+        self._palette = dict(palette)
+        self.configure(bg=self._palette["parent_bg"])
+        self._render()
+
+    def set_text(self, text: str):
+        self._text = text
+        f = tkfont.Font(family=self._font[0], size=self._font[1])
+        self._width = f.measure(text) + 2 * self._padx
+        self.configure(width=self._width)
+        self._render()
+
+    def set_active(self, active: bool):
+        """Show this button as the 'active' pick (used by the sun/moon toggle)."""
+        self._sticky_pressed = active
+        self._render()
+
+
 class TodoApp(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -272,7 +418,7 @@ class TodoApp(tk.Tk):
 
         self.existing_files_label = ttk.Label(left, text="Existing files")
         self.existing_files_label.grid(row=0, column=0, sticky="w")
-        self.refresh_btn = ttk.Button(left, text="Refresh", command=self._refresh_files)
+        self.refresh_btn = RoundedButton(left, text="Refresh", command=self._refresh_files)
         self.refresh_btn.grid(row=1, column=0, sticky="we", pady=(4, 4))
 
         self.file_list = ttk.Treeview(
@@ -288,9 +434,9 @@ class TodoApp(tk.Tk):
         self.file_list.column("modified", width=130, anchor="center", stretch=False)
         self.file_list.grid(row=2, column=0, sticky="we", pady=(0, 4))
         self.file_list.bind("<<TreeviewSelect>>", self._on_file_selected)
-        self.delete_btn = ttk.Button(left, text="Delete", command=self._delete_selected)
+        self.delete_btn = RoundedButton(left, text="Delete", command=self._delete_selected)
         self.delete_btn.grid(row=3, column=0, sticky="we")
-        self.new_btn = ttk.Button(left, text="New", command=self._new_entry)
+        self.new_btn = RoundedButton(left, text="New", command=self._new_entry)
         self.new_btn.grid(row=4, column=0, sticky="we", pady=(4, 10))
 
         self.preview_label_caption = ttk.Label(left, text="Preview")
@@ -318,38 +464,47 @@ class TodoApp(tk.Tk):
 
         self.entries_caption = ttk.Label(
             top_row,
-            text=f"Up to {MAX_ITEMS} entries, {MAX_CHARS} chars each.",
+            text=f"Up to {MAX_ITEMS} entries, {MAX_CHARS} characters each.",
         )
         self.entries_caption.grid(row=0, column=0, sticky="w")
 
         theme_frame = ttk.Frame(top_row)
         theme_frame.grid(row=0, column=1, sticky="e")
-        self.sun_btn = tk.Button(
-            theme_frame, text="☀", width=2,
+        self.sun_btn = RoundedButton(
+            theme_frame, text="☀",
             command=lambda: self._apply_theme("light"),
-            relief="flat", borderwidth=1, font=("Segoe UI Symbol", 11, "bold"),
+            width=34, height=28, radius=7, padx=8,
+            font=("Segoe UI Symbol", 11, "bold"),
         )
-        self.sun_btn.grid(row=0, column=0, padx=(0, 2))
-        self.moon_btn = tk.Button(
-            theme_frame, text="☾", width=2,
+        self.sun_btn.grid(row=0, column=0, padx=(0, 4))
+        self.moon_btn = RoundedButton(
+            theme_frame, text="☾",
             command=lambda: self._apply_theme("dark"),
-            relief="flat", borderwidth=1, font=("Segoe UI Symbol", 11, "bold"),
+            width=34, height=28, radius=7, padx=8,
+            font=("Segoe UI Symbol", 11, "bold"),
         )
         self.moon_btn.grid(row=0, column=1)
+
+        # Centered sub-frame holding the 8 entry rows so the whole label+entry
+        # group sits in the visual middle of the right pane, not flush left.
+        right.columnconfigure(0, weight=1)
+        right.columnconfigure(2, weight=1)
+        entries_block = ttk.Frame(right)
+        entries_block.grid(row=1, column=0, columnspan=3, pady=(0, 0))
 
         self.entries = []
         self._entry_num_labels = []
         for i in range(MAX_ITEMS):
-            num_lbl = ttk.Label(right, text=f"{i + 1}.")
-            num_lbl.grid(row=1 + i, column=0, sticky="e", padx=(0, 6), pady=2)
+            num_lbl = ttk.Label(entries_block, text=f"{i + 1}.")
+            num_lbl.grid(row=i, column=0, sticky="e", padx=(0, 6), pady=2)
             self._entry_num_labels.append(num_lbl)
             vcmd = (self.register(self._validate_len), "%P")
-            e = ttk.Entry(right, width=30, validate="key", validatecommand=vcmd)
-            e.grid(row=1 + i, column=1, columnspan=2, sticky="we", pady=2)
+            e = ttk.Entry(entries_block, width=30, validate="key", validatecommand=vcmd, justify="center")
+            e.grid(row=i, column=1, pady=2)
             e.bind("<KeyRelease>", lambda _ev: self._live_preview())
             self.entries.append(e)
 
-        row = 1 + MAX_ITEMS
+        row = 2  # next available row after top_row (0) and entries_block (1)
         ttk.Separator(right, orient="horizontal").grid(row=row, column=0, columnspan=3, sticky="we", pady=10)
 
         row += 1
@@ -357,14 +512,16 @@ class TodoApp(tk.Tk):
         self.text_color_label.grid(row=row, column=0, sticky="e", padx=(0, 6))
         self.fg_swatch = tk.Label(right, text="    ", bg=self.fg_color, relief="sunken", width=4)
         self.fg_swatch.grid(row=row, column=1, sticky="w")
-        ttk.Button(right, text="Select…", command=self._pick_fg).grid(row=row, column=1, columnspan=2, sticky="we", padx=(50, 0))
+        self.fg_select_btn = RoundedButton(right, text="Select…", command=self._pick_fg)
+        self.fg_select_btn.grid(row=row, column=1, columnspan=2, sticky="we", padx=(50, 0))
 
         row += 1
         self.bg_color_label = ttk.Label(right, text="Background:")
         self.bg_color_label.grid(row=row, column=0, sticky="e", padx=(0, 6), pady=(4, 0))
         self.bg_swatch = tk.Label(right, text="    ", bg=self.bg_color, relief="sunken", width=4)
         self.bg_swatch.grid(row=row, column=1, sticky="w", pady=(4, 0))
-        ttk.Button(right, text="Select…", command=self._pick_bg).grid(row=row, column=1, columnspan=2, sticky="we", padx=(50, 0), pady=(4, 0))
+        self.bg_select_btn = RoundedButton(right, text="Select…", command=self._pick_bg)
+        self.bg_select_btn.grid(row=row, column=1, columnspan=2, sticky="we", padx=(50, 0), pady=(4, 0))
 
         row += 1
         ttk.Separator(right, orient="horizontal").grid(row=row, column=0, columnspan=3, sticky="we", pady=10)
@@ -378,25 +535,35 @@ class TodoApp(tk.Tk):
         self.png_suffix_label.grid(row=row, column=2, sticky="w", padx=(2, 0))
 
         row += 1
-        ttk.Button(right, text="Generate PNG", command=self._generate).grid(
-            row=row, column=0, columnspan=3, sticky="we", pady=(14, 4)
-        )
+        self.generate_btn = RoundedButton(right, text="Generate PNG", command=self._generate)
+        self.generate_btn.grid(row=row, column=0, columnspan=3, sticky="we", pady=(14, 4))
 
         row += 1
-        self.status = ttk.Label(right, text=f"Output folder: {IMAGES_DIR}", wraplength=320)
-        self.status.grid(row=row, column=0, columnspan=3, sticky="w", pady=(6, 0))
+        default_font = tkfont.nametofont("TkDefaultFont")
+        self.status = tk.Text(
+            right, height=4, width=44, wrap="char",
+            relief="flat", bd=0, highlightthickness=0,
+            padx=0, pady=0, cursor="arrow", takefocus=0,
+        )
+        self.status.tag_configure(
+            "bold",
+            font=(default_font.actual("family"), default_font.actual("size"), "bold"),
+        )
+        self.status.grid(row=row, column=0, columnspan=3, sticky="we", pady=(6, 0))
+        self.status.configure(state="disabled")
+        self._set_status(f"Output folder: {IMAGES_DIR}", bold_prefix="Output folder:")
 
         # ── Keyboard Shortcuts section ─────────────────────────────────────
         self._shortcuts = load_shortcuts()
 
         row += 1
         ttk.Separator(right, orient="horizontal").grid(
-            row=row, column=0, columnspan=3, sticky="we", pady=(12, 8)
+            row=row, column=0, columnspan=3, sticky="we", pady=(8, 0)
         )
 
         row += 1
-        shortcut_frame = ttk.Frame(right, height=120)
-        shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(8, 6))
+        shortcut_frame = ttk.Frame(right, height=114)
+        shortcut_frame.grid(row=row, column=0, columnspan=3, sticky="we", pady=(2, 0))
         shortcut_frame.grid_propagate(False)  # frame size never tracks content -> window cannot resize
         shortcut_frame.columnconfigure(0, weight=1)
         self.shortcut_keys_label = ttk.Label(
@@ -416,11 +583,11 @@ class TodoApp(tk.Tk):
         self.shortcut_category_label.grid(row=2, column=0, sticky="nw", pady=(4, 0))
 
         row += 1
-        self.shortcuts_ref_btn = ttk.Button(
+        self.shortcuts_ref_btn = RoundedButton(
             right, text="Keyboard Shortcuts Reference",
             command=self._open_shortcuts_reference,
         )
-        self.shortcuts_ref_btn.grid(row=row, column=0, columnspan=3, sticky="we", pady=(4, 0))
+        self.shortcuts_ref_btn.grid(row=row, column=0, columnspan=3, sticky="we", pady=(2, 0))
 
         self._shortcut_after_id = None
         self._schedule_shortcut_rotation()
@@ -435,7 +602,13 @@ class TodoApp(tk.Tk):
             + [self.text_color_label, self.bg_color_label, self.filename_label,
                self.shortcut_keys_label, self.shortcut_category_label]
         )
-        self._text_widgets = [self.shortcut_action_text]
+        self._text_widgets = [self.shortcut_action_text, self.status]
+        self._rounded_buttons = [
+            self.refresh_btn, self.delete_btn, self.new_btn,
+            self.fg_select_btn, self.bg_select_btn,
+            self.generate_btn, self.shortcuts_ref_btn,
+            self.sun_btn, self.moon_btn,
+        ]
 
         self.style = ttk.Style(self)
         try:
@@ -531,7 +704,7 @@ class TodoApp(tk.Tk):
         self._set_entries([])
         self._set_colors(self._user_fg, self._user_bg)
         self._live_preview()
-        self.status.configure(text=f"Fresh slate — filename set to {next_name}.png.")
+        self._set_status(f"Fresh slate — filename set to {next_name}.png.")
 
     def _delete_selected(self):
         name = self._selected_filename()
@@ -548,7 +721,7 @@ class TodoApp(tk.Tk):
         try:
             path.unlink()
             print(f"[DEBUG] deleted {path}")
-            self.status.configure(text=f"Deleted {name}.")
+            self._set_status(f"Deleted {name}.")
             self._refresh_files()
             self._live_preview()
         except Exception as exc:
@@ -576,7 +749,7 @@ class TodoApp(tk.Tk):
         fg = meta.get("fg", DEFAULT_FG)
         bg = meta.get("bg", DEFAULT_BG)
         self._set_colors(fg, bg)
-        self.status.configure(text=f"Loaded {name} — generating will overwrite it.")
+        self._set_status(f"Loaded {name} — generating will overwrite it.")
 
     def _generate(self):
         items = [e.get().strip() for e in self.entries]
@@ -605,7 +778,7 @@ class TodoApp(tk.Tk):
             t0 = time.perf_counter()
             render_png(items, self.fg_color, self.bg_color, out_path)
             ms = (time.perf_counter() - t0) * 1000
-            self.status.configure(text=f"Wrote {out_path.name} ({ms:.0f} ms) — ready to upload.")
+            self._set_status(f"Wrote {out_path.name} ({ms:.0f} ms) — ready to upload.")
             print(f"[DEBUG] generated {out_path} in {ms:.1f} ms")
             self._refresh_files()
             if self.file_list.exists(out_path.name):
@@ -663,7 +836,21 @@ class TodoApp(tk.Tk):
         cname, s = random.choice(choices)
         self.shortcut_keys_label.configure(text=s.get("keys", ""))
         self._set_action_text(s.get("action", ""))
-        self.shortcut_category_label.configure(text=f"Category: {cname}")
+        self.shortcut_category_label.configure(text=f"Shortcut Category: {cname}")
+
+    def _set_status(self, text: str, bold_prefix: str = None):
+        """Replace the contents of the (disabled) status Text widget.
+        If bold_prefix is given and matches the start of `text`, that prefix
+        is rendered with the 'bold' tag and the rest stays normal weight."""
+        s = self.status
+        s.configure(state="normal")
+        s.delete("1.0", "end")
+        if bold_prefix and text.startswith(bold_prefix):
+            s.insert("1.0", bold_prefix, "bold")
+            s.insert("end", text[len(bold_prefix):])
+        else:
+            s.insert("1.0", text)
+        s.configure(state="disabled")
 
     def _set_action_text(self, text: str):
         """Replace the contents of the (disabled) action Text widget.
@@ -786,6 +973,8 @@ class TodoApp(tk.Tk):
             for child in body.winfo_children():
                 if isinstance(child, tk.Label):
                     child.configure(bg=tt["listbox_bg"], fg=tt["listbox_fg"])
+                elif isinstance(child, tk.Frame):
+                    child.configure(bg=tt["heading_border"])
 
         win._apply_table_palette = apply_table_palette
 
@@ -802,19 +991,29 @@ class TodoApp(tk.Tk):
             wrap_action = max(200, cw - keys_col_w - 16)
             wrap_keys = max(120, keys_col_w - 16)
             tt = THEMES[self._current_theme]
-            for i, s in enumerate(cat.get("shortcuts", [])):
+            shortcuts = cat.get("shortcuts", [])
+            # Each shortcut occupies two grid rows: a 1px separator at row r,
+            # then the keys/action labels at row r+1. A final separator after
+            # the last row guarantees every entry has a line above and below.
+            for i, s in enumerate(shortcuts):
+                base = i * 2
+                sep = tk.Frame(body, height=1, bg=tt["heading_border"])
+                sep.grid(row=base, column=0, columnspan=2, sticky="we")
                 k = tk.Label(
                     body, text=s.get("keys", ""), font=("Consolas", 10),
                     anchor="nw", justify="left", wraplength=wrap_keys,
                     bg=tt["listbox_bg"], fg=tt["listbox_fg"],
                 )
-                k.grid(row=i, column=0, sticky="nw", padx=8, pady=4)
+                k.grid(row=base + 1, column=0, sticky="nw", padx=8, pady=4)
                 a = tk.Label(
                     body, text=s.get("action", ""),
                     anchor="nw", justify="left", wraplength=wrap_action,
                     bg=tt["listbox_bg"], fg=tt["listbox_fg"],
                 )
-                a.grid(row=i, column=1, sticky="nw", padx=8, pady=4)
+                a.grid(row=base + 1, column=1, sticky="nw", padx=8, pady=4)
+            if shortcuts:
+                final_sep = tk.Frame(body, height=1, bg=tt["heading_border"])
+                final_sep.grid(row=len(shortcuts) * 2, column=0, columnspan=2, sticky="we")
             body.update_idletasks()
             canvas.configure(scrollregion=canvas.bbox("all"))
 
@@ -839,14 +1038,17 @@ class TodoApp(tk.Tk):
         # Right side: vertical sidebar of category buttons.
         sidebar = ttk.Frame(win)
         sidebar.grid(row=0, column=1, sticky="ns")
+        sidebar_buttons = []
         for i, (cat_key, cat) in enumerate(cats):
-            btn = ttk.Button(
+            btn = RoundedButton(
                 sidebar,
                 text=cat.get("display_name", cat_key),
                 command=lambda k=cat_key: show_cat(k),
-                width=20,
+                width=170, height=32, padx=10,
             )
             btn.grid(row=i, column=0, sticky="we", pady=(0, 4))
+            sidebar_buttons.append(btn)
+        win._sidebar_buttons = sidebar_buttons
 
         # Defer the first populate until after the dialog is mapped so the
         # canvas has its real width; otherwise action labels would all be
@@ -929,15 +1131,13 @@ class TodoApp(tk.Tk):
                 selectforeground=t["listbox_sel_fg"],
             )
 
-        for btn in (self.sun_btn, self.moon_btn):
-            btn.configure(
-                bg=t["btn_bg"], fg=t["btn_fg"],
-                activebackground=t["btn_active_bg"], activeforeground=t["btn_fg"],
-                highlightbackground=t["bg"],
-            )
-        # Indicate active theme by raising the selected button.
-        self.sun_btn.configure(relief=("sunken" if name == "light" else "flat"))
-        self.moon_btn.configure(relief=("sunken" if name == "dark" else "flat"))
+        # All canvas-based RoundedButtons follow the theme's btn_palette.
+        btn_pal = t["btn_palette"]
+        for rb in getattr(self, "_rounded_buttons", []):
+            rb.apply_palette(btn_pal)
+        # Indicate active theme by 'sticky-pressing' the selected button.
+        self.sun_btn.set_active(name == "light")
+        self.moon_btn.set_active(name == "dark")
 
         self._apply_titlebar_theme(name)
 
@@ -967,6 +1167,12 @@ class TodoApp(tk.Tk):
         if callable(fn):
             try:
                 fn()
+            except tk.TclError:
+                pass
+        # Re-paint any RoundedButtons attached to this popup (e.g. sidebar).
+        for rb in getattr(win, "_sidebar_buttons", []):
+            try:
+                rb.apply_palette(t["btn_palette"])
             except tk.TclError:
                 pass
 
